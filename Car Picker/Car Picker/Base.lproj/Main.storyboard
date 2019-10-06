@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Car_Picker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGm-e9-lQP" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="567"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHj-3V-XXg">
+                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pjf-XN-TFY">
+                                        <rect key="frame" x="252" y="20" width="103" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <state key="normal" title="Start a trip"/>
+                                        <connections>
+                                            <action selector="startTripAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zIE-bD-obf"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTc-KD-dpf">
+                                        <rect key="frame" x="20" y="20" width="42" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="eTc-KD-dpf" secondAttribute="bottom" constant="20" id="1ZA-ec-KLq"/>
+                                    <constraint firstAttribute="bottom" secondItem="pjf-XN-TFY" secondAttribute="bottom" constant="20" id="4Df-kv-vYv"/>
+                                    <constraint firstItem="eTc-KD-dpf" firstAttribute="top" secondItem="yHj-3V-XXg" secondAttribute="top" constant="20" id="CN3-EI-4cR"/>
+                                    <constraint firstAttribute="trailing" secondItem="pjf-XN-TFY" secondAttribute="trailing" constant="20" id="Q8i-Gm-BNb"/>
+                                    <constraint firstItem="pjf-XN-TFY" firstAttribute="top" secondItem="yHj-3V-XXg" secondAttribute="top" constant="20" id="ZNw-iW-T3u"/>
+                                    <constraint firstItem="eTc-KD-dpf" firstAttribute="leading" secondItem="yHj-3V-XXg" secondAttribute="leading" constant="20" id="eGs-Ps-5CH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eGm-e9-lQP" secondAttribute="trailing" id="4ct-Kw-mlf"/>
+                            <constraint firstItem="eGm-e9-lQP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8mg-RF-mys"/>
+                            <constraint firstItem="yHj-3V-XXg" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="BKn-S4-5TT"/>
+                            <constraint firstItem="yHj-3V-XXg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="DJH-a8-oxD"/>
+                            <constraint firstItem="yHj-3V-XXg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Q7l-w5-rGx"/>
+                            <constraint firstItem="eGm-e9-lQP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="V45-Cl-oh7"/>
+                            <constraint firstItem="yHj-3V-XXg" firstAttribute="top" secondItem="eGm-e9-lQP" secondAttribute="bottom" id="vTi-X0-Yx9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerMapView" destination="eGm-e9-lQP" id="DfZ-bH-1qo"/>
+                        <outlet property="intermediateLoactionLabel" destination="eTc-KD-dpf" id="dV0-Qf-eEG"/>
+                        <outlet property="startTripButton" destination="pjf-XN-TFY" id="uKb-D4-LSI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
