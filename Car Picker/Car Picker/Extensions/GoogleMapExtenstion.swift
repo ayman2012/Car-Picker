@@ -25,42 +25,26 @@ extension GMSMapView {
         polyline.strokeColor = UIColor.blue
         polyline.map = self
         self.addSubview(activityIndicator)
-
     }
+
     private func addMarker(positions: [CLLocationCoordinate2D]) {
         for index in 0..<positions.count {
             if index < positions.count - 1 {
                 self.getPolylineRoute(from: positions[index], to: positions[index + 1])
             }
             let marker = GMSMarker()
-
             marker.position = positions[index]
-            marker.title = "Source"
-            marker.appearAnimation = .pop
-            let camera = GMSCameraPosition.camera(withLatitude: positions[index].latitude, longitude: positions[index].longitude, zoom: 14.0)
-            self.animate(to: camera)
             DispatchQueue.main.async {
                 marker.map = self
             }
         }
     }
 
-    func setUPMapWithMarkers(positionsInfo:Positions?){
+    func setUPMapWithMarkers(locationInfo:[CLLocationCoordinate2D]){
         self.clear()
-        if let positionsInfo = positionsInfo {
-            var positions: [CLLocationCoordinate2D] = []
-            let satrtPoint = CLLocationCoordinate2D.init(latitude: positionsInfo.startPostion.lat,
-                                                         longitude: positionsInfo.startPostion.lng)
-            let endPoint = CLLocationCoordinate2D.init(latitude: positionsInfo.endPostion.lat,
-                                                       longitude: positionsInfo.endPostion.lng)
-            positions.append(satrtPoint)
-            for marker in positionsInfo.intermediateLoactions ?? [] {
-                positions.append(CLLocationCoordinate2D.init(latitude: marker.lat, longitude: marker.lng))
-            }
-            positions.append(endPoint)
-            self.addMarker(positions: positions)
-        }
-    }
+        self.addMarker(positions: locationInfo)
+   }
+    
     func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
 
         let config = URLSessionConfiguration.default

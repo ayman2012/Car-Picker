@@ -1,5 +1,13 @@
 PODS:
   - Alamofire (4.8.2)
+  - AppCenter (2.1.0):
+    - AppCenter/Analytics (= 2.1.0)
+    - AppCenter/Crashes (= 2.1.0)
+  - AppCenter/Analytics (2.1.0):
+    - AppCenter/Core
+  - AppCenter/Core (2.1.0)
+  - AppCenter/Crashes (2.1.0):
+    - AppCenter/Core
   - GoogleMaps (3.1.0):
     - GoogleMaps/Maps (= 3.1.0)
   - GoogleMaps/Base (3.1.0)
@@ -11,6 +19,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - AppCenter
   - GoogleMaps
   - GooglePlaces
   - Starscream
@@ -18,16 +27,18 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AppCenter
     - GoogleMaps
     - GooglePlaces
     - Starscream
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  AppCenter: 21decaa4488024e8355e650e44ccabb69ca60d47
   GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
   GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
   Starscream: 08172b481e145289c4930cb567230fb55897cfa4
 
-PODFILE CHECKSUM: c84d8e9076060a3d885cd57bc34923ebb56c11bf
+PODFILE CHECKSUM: b15442524b537b11453fbc8f83694bdd04520479
 
 COCOAPODS: 1.6.1

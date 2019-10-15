@@ -11,6 +11,9 @@ target 'Car Picker' do
   pod 'GooglePlaces'
   pod 'Alamofire'
 
+  # CI/CD
+  pod 'AppCenter'
+  
   target 'Car PickerTests' do
     inherit! :search_paths
     # Pods for testing

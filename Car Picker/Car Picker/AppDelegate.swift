@@ -9,6 +9,9 @@ import UIKit
 import CoreData
 import GoogleMaps
 import GooglePlaces
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(Constants.mapKey)
         GMSPlacesClient.provideAPIKey(Constants.mapKey)
 
-
+        MSAppCenter.start("17b67e6f-c853-48ae-b15a-2fc5f5e1003d", withServices:[
+            MSAnalytics.self,
+            MSCrashes.self
+            ])
         return true
     }
 

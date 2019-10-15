@@ -4,22 +4,6 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Car Picker/ViewController.swift"
-            timestampString = "592085100.702098"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "handelvehicleStatus(jsonResponse:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
@@ -36,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Car Picker/Extensions/GoogleMapExtenstion.swift"
-            timestampString = "592085100.703243"
+            timestampString = "592571399.059688"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "getPolylineRoute(from:to:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -52,12 +36,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Car Picker/ViewController.swift"
-            timestampString = "592085100.703799"
+            timestampString = "592390077.1258121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "startConnection()"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "dimTripButton(enabled:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -68,44 +52,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Car Picker/ViewController.swift"
-            timestampString = "592085100.704163"
+            timestampString = "592390077.12587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "stopConnection()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Car Picker/ViewController.swift"
-            timestampString = "592085100.704482"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "websocketDidReceiveData(socket:data:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Car Picker/ViewController.swift"
-            timestampString = "592085100.704794"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "startTripAction(_:)"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "updateMapWithMarkers(locations:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
