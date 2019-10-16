@@ -20,6 +20,7 @@
 		8F587DE12340EEE6000B8CA4 /* Car_PickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F587DE02340EEE6000B8CA4 /* Car_PickerTests.swift */; };
 		8F7AF5EA2340F35000B124C6 /* BookingOpenedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AF5E92340F35000B124C6 /* BookingOpenedModel.swift */; };
 		8F94262F234B8DA3006F577E /* SocketMananager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F94262E234B8DA3006F577E /* SocketMananager.swift */; };
+		8F9E51EA23565D9C00931AB2 /* CarPickerViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */; };
 		8FD53DBA2347ABC70055C7D6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD53DB92347ABC70055C7D6 /* Constants.swift */; };
 		8FD53DBD2347ACCD0055C7D6 /* CLLocationCoordinate2D+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD53DBC2347ACCD0055C7D6 /* CLLocationCoordinate2D+Extensions.swift */; };
 		8FD53DBF2347BB660055C7D6 /* GoogleMapExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD53DBE2347BB660055C7D6 /* GoogleMapExtenstion.swift */; };
@@ -57,6 +58,7 @@
 		8F587DE22340EEE6000B8CA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F7AF5E92340F35000B124C6 /* BookingOpenedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingOpenedModel.swift; sourceTree = "<group>"; };
 		8F94262E234B8DA3006F577E /* SocketMananager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMananager.swift; sourceTree = "<group>"; };
+		8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPickerViewControllerTest.swift; sourceTree = "<group>"; };
 		8FD53DB92347ABC70055C7D6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8FD53DBC2347ACCD0055C7D6 /* CLLocationCoordinate2D+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extensions.swift"; sourceTree = "<group>"; };
 		8FD53DBE2347BB660055C7D6 /* GoogleMapExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapExtenstion.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				8F587DE02340EEE6000B8CA4 /* Car_PickerTests.swift */,
 				8F16374C2351EFD2005F3E0F /* CarPickerViewModelTest.swift */,
+				8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */,
 				8F587DE22340EEE6000B8CA4 /* Info.plist */,
 			);
 			path = "Car PickerTests";
@@ -428,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F587DE12340EEE6000B8CA4 /* Car_PickerTests.swift in Sources */,
+				8F9E51EA23565D9C00931AB2 /* CarPickerViewControllerTest.swift in Sources */,
 				8F16374D2351EFD2005F3E0F /* CarPickerViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

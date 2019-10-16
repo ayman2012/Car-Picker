@@ -20,7 +20,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Car Picker/Extensions/GoogleMapExtenstion.swift"
-            timestampString = "592571399.059688"
+            timestampString = "592864043.92967"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
@@ -58,6 +58,22 @@
             startingLineNumber = "86"
             endingLineNumber = "86"
             landmarkName = "updateMapWithMarkers(locations:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Car Picker/AppModules/CarPickerModule/CarPickerViewModel.swift"
+            timestampString = "592864462.504938"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "handelvehicleStatus(json:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

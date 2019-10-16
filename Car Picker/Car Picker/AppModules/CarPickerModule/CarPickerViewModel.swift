@@ -67,7 +67,10 @@ class CarPickerViewModel {
             return viewController.updateMapWithMarkers(locations: locations ?? [])
 
         case .intermediateStopLocationsChanged(let intermediateLoactionsModel):
-            let dropOffLocation = locations?.removeLast()
+            var dropOffLocation: CLLocationCoordinate2D?
+            if !(locations?.isEmpty ?? true) {
+                dropOffLocation = locations?.removeLast()
+            }
             guard let vehicleLoaction = vehicleLocation else {return false}
             locations = [vehicleLoaction]
             for itermediateLocation in intermediateLoactionsModel.locations {
@@ -98,10 +101,10 @@ class CarPickerViewModel {
     func checkIfInVehicleStatus(status: String) -> Bool {
 
         if status == "inVehicle" {
-            if let location = vehicleLocation ,  locations != nil {
-                locations?[0] = location
-            }
             inVehicleStatus = true
+            guard let location = vehicleLocation else { return false }
+            guard var locationsData = locations, !locationsData.isEmpty else { return false}
+            locationsData[0] = location
             return true
         }else{
             inVehicleStatus = false

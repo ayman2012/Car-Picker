@@ -23,6 +23,9 @@ extension  CLLocationCoordinate2D {
         latitude = location.lat
         longitude = location.lng
     }
+   func isEqual(to:CLLocationCoordinate2D) -> Bool {
+    return self.latitude == to.latitude && self.longitude == to.longitude
+    }
 }
 
 extension CGFloat {

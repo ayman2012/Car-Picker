@@ -14,10 +14,16 @@ import Foundation
 
 class CarPickerViewController: UIViewController {
 
+    //MARK: Outlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var containerMapView: GMSMapView!
     @IBOutlet weak var startTripButton: UIButton!
     @IBOutlet weak var intermediateLoactionLabel: UILabel!
+
+    //MARK: variables
+    private var carPickerViewModel: CarPickerViewModel?
+    private let vecileMarker = GMSMarker()
+    private var breviousPosition: CLLocationCoordinate2D?
 
     @IBAction func startTripAction(_ sender: Any) {
 
@@ -32,17 +38,16 @@ class CarPickerViewController: UIViewController {
         }
     }
 
-    var carPickerViewModel: CarPickerViewModel?
-    let vecileMarker = GMSMarker()
-    var breviousPosition: CLLocationCoordinate2D?
 
+    //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         carPickerViewModel = CarPickerViewModel(viewController: self)
     }
 }
 extension CarPickerViewController: CarPickerViewControllerProtocol {
-    func showVehcileMarker(position: CLLocationCoordinate2D) {
+    @discardableResult
+    func showVehcileMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
         if breviousPosition == nil {
             addCarMarker(position: position)
         }
@@ -58,9 +63,10 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
         DispatchQueue.main.async {
             self.vecileMarker.map = self.containerMapView
         }
+        return vecileMarker.position
     }
 
-   private func addCarMarker(position: CLLocationCoordinate2D) {
+   private func addCarMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
         breviousPosition = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
         let degrees = breviousPosition?.angle(to: position)
         breviousPosition = position
@@ -75,6 +81,7 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
         DispatchQueue.main.async {
             self.vecileMarker.map = self.containerMapView
         }
+    return vecileMarker.position
     }
     @discardableResult
     func updateMapWithMarkers(locations: [CLLocationCoordinate2D])->Bool {
@@ -84,9 +91,10 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
         containerMapView.setUPMapWithMarkers(locationInfo: locations)
         return true
     }
-    func dimTripButton(enabled: Bool) {
+    @discardableResult
+    func dimTripButton(enabled: Bool) -> Bool {
       startTripButton.isEnabled = enabled
-      startTripButton.superview?.frame.size.height = 0 
+      return startTripButton.isEnabled
     }
 }
 

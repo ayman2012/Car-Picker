@@ -9,8 +9,10 @@ import Foundation
 import CoreLocation
 
 protocol CarPickerViewControllerProtocol: class {
-    func showVehcileMarker(position: CLLocationCoordinate2D)
+    @discardableResult
+    func showVehcileMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D
     @discardableResult
     func updateMapWithMarkers(locations: [CLLocationCoordinate2D]) -> Bool
-    func dimTripButton(enabled: Bool)
+    @discardableResult
+    func dimTripButton(enabled: Bool) -> Bool
 }
