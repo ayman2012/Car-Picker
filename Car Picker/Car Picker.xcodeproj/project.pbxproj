@@ -21,6 +21,9 @@
 		8F7AF5EA2340F35000B124C6 /* BookingOpenedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AF5E92340F35000B124C6 /* BookingOpenedModel.swift */; };
 		8F94262F234B8DA3006F577E /* SocketMananager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F94262E234B8DA3006F577E /* SocketMananager.swift */; };
 		8F9E51EA23565D9C00931AB2 /* CarPickerViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */; };
+		8FAA92B22358FFCF003FA690 /* CLLocationCoordinate2DTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA92B12358FFCF003FA690 /* CLLocationCoordinate2DTest.swift */; };
+		8FAA92B423590655003FA690 /* SocketMananagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA92B323590655003FA690 /* SocketMananagerTest.swift */; };
+		8FAA92B723590D85003FA690 /* bookingOpenedJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 8FAA92B623590D85003FA690 /* bookingOpenedJson.json */; };
 		8FD53DBA2347ABC70055C7D6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD53DB92347ABC70055C7D6 /* Constants.swift */; };
 		8FD53DBD2347ACCD0055C7D6 /* CLLocationCoordinate2D+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD53DBC2347ACCD0055C7D6 /* CLLocationCoordinate2D+Extensions.swift */; };
 		8FD53DBF2347BB660055C7D6 /* GoogleMapExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD53DBE2347BB660055C7D6 /* GoogleMapExtenstion.swift */; };
@@ -59,6 +62,9 @@
 		8F7AF5E92340F35000B124C6 /* BookingOpenedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingOpenedModel.swift; sourceTree = "<group>"; };
 		8F94262E234B8DA3006F577E /* SocketMananager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMananager.swift; sourceTree = "<group>"; };
 		8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPickerViewControllerTest.swift; sourceTree = "<group>"; };
+		8FAA92B12358FFCF003FA690 /* CLLocationCoordinate2DTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2DTest.swift; sourceTree = "<group>"; };
+		8FAA92B323590655003FA690 /* SocketMananagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMananagerTest.swift; sourceTree = "<group>"; };
+		8FAA92B623590D85003FA690 /* bookingOpenedJson.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bookingOpenedJson.json; sourceTree = "<group>"; };
 		8FD53DB92347ABC70055C7D6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8FD53DBC2347ACCD0055C7D6 /* CLLocationCoordinate2D+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extensions.swift"; sourceTree = "<group>"; };
 		8FD53DBE2347BB660055C7D6 /* GoogleMapExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapExtenstion.swift; sourceTree = "<group>"; };
@@ -170,10 +176,14 @@
 		8F587DDF2340EEE6000B8CA4 /* Car PickerTests */ = {
 			isa = PBXGroup;
 			children = (
+				8FAA92B8235A0A64003FA690 /* quick&nimbleTests */,
+				8FAA92B523590D5C003FA690 /* Resources */,
 				8F587DE02340EEE6000B8CA4 /* Car_PickerTests.swift */,
 				8F16374C2351EFD2005F3E0F /* CarPickerViewModelTest.swift */,
 				8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */,
 				8F587DE22340EEE6000B8CA4 /* Info.plist */,
+				8FAA92B12358FFCF003FA690 /* CLLocationCoordinate2DTest.swift */,
+				8FAA92B323590655003FA690 /* SocketMananagerTest.swift */,
 			);
 			path = "Car PickerTests";
 			sourceTree = "<group>";
@@ -184,6 +194,21 @@
 				8F7AF5E92340F35000B124C6 /* BookingOpenedModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		8FAA92B523590D5C003FA690 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8FAA92B623590D85003FA690 /* bookingOpenedJson.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8FAA92B8235A0A64003FA690 /* quick&nimbleTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "quick&nimbleTests";
 			sourceTree = "<group>";
 		};
 		8FD53DBB2347ACAF0055C7D6 /* Extensions */ = {
@@ -308,6 +333,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FAA92B723590D85003FA690 /* bookingOpenedJson.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,18 +346,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Car Picker/Pods-Car Picker-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Car Picker/Pods-Car Picker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Car Picker/Pods-Car Picker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -344,18 +363,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Car Picker/Pods-Car Picker-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-Car Picker/Pods-Car Picker-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-Car Picker/Pods-Car Picker-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -430,8 +442,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FAA92B423590655003FA690 /* SocketMananagerTest.swift in Sources */,
 				8F587DE12340EEE6000B8CA4 /* Car_PickerTests.swift in Sources */,
 				8F9E51EA23565D9C00931AB2 /* CarPickerViewControllerTest.swift in Sources */,
+				8FAA92B22358FFCF003FA690 /* CLLocationCoordinate2DTest.swift in Sources */,
 				8F16374D2351EFD2005F3E0F /* CarPickerViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

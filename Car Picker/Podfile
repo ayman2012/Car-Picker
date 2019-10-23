@@ -13,7 +13,12 @@ target 'Car Picker' do
 
   # CI/CD
   pod 'AppCenter'
-  
+
+
+  # Testing
+  pod 'Quick'
+  pod 'Nimble'
+
   target 'Car PickerTests' do
     inherit! :search_paths
     # Pods for testing

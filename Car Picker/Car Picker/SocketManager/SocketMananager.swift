@@ -11,28 +11,32 @@ import Starscream
 class SocketMananager: WebSocketDelegate {
 
 
+    static let shared = SocketMananager()
     private var socket: WebSocket?
 
-    static let shared = SocketMananager()
-
     private init() {
+
         socket = WebSocket(url: URL(string: Constants.socketUrl)!)
         socket?.delegate = self
     }
 
-
     var completionWithMessage: ((String)->Void)?
     var completionWithData: ((Data)->Void)?
     var disconnectcompletion: (()->())?
+
     @discardableResult
     func startConnection() -> Bool {
+
         guard let socket = socket else{ return false}
         socket.connect()
         return true
     }
+
     @discardableResult
     func stopConnection()-> Bool {
-        guard let socket = socket else{ return false}
+
+        guard let socket = socket else { return false}
+        if !socket.isConnected { return false }
         socket.disconnect()
         return true
     }

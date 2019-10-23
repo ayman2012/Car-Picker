@@ -11,6 +11,7 @@ import  UIKit
 
 extension GMSMapView {
     var activityIndicator: UIActivityIndicatorView {
+        
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.style = UIActivityIndicatorView.Style.gray
         activityIndicator.backgroundColor = .black
@@ -18,20 +19,22 @@ extension GMSMapView {
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }
-    private func showPath(polyStr :String){
-        let path = GMSPath(fromEncodedPath: polyStr)
-        let polyline = GMSPolyline(path: path)
-        polyline.strokeWidth = 3.0
-        polyline.strokeColor = UIColor.blue
-        polyline.map = self
-        self.addSubview(activityIndicator)
-    }
+
+
+    func setUPMapWithMarkers(locationInfo:[CLLocationCoordinate2D]) {
+
+        self.clear()
+        self.addMarker(positions: locationInfo)
+   }
 
     private func addMarker(positions: [CLLocationCoordinate2D]) {
+
         for index in 0..<positions.count {
+
             if index < positions.count - 1 {
                 self.getPolylineRoute(from: positions[index], to: positions[index + 1])
             }
+
             let marker = GMSMarker()
             marker.position = positions[index]
             DispatchQueue.main.async {
@@ -39,13 +42,18 @@ extension GMSMapView {
             }
         }
     }
-
-    func setUPMapWithMarkers(locationInfo:[CLLocationCoordinate2D]){
-        self.clear()
-        self.addMarker(positions: locationInfo)
-   }
     
-    func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
+    private func showPath(polyStr :String) {
+
+        let path = GMSPath(fromEncodedPath: polyStr)
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeWidth = 3.0
+        polyline.strokeColor = UIColor.blue
+        polyline.map = self
+        self.addSubview(activityIndicator)
+    }
+    
+    private func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
 
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)

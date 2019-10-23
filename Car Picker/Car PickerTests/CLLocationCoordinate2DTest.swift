@@ -6,27 +6,24 @@
 //
 
 import XCTest
-
+import CoreLocation
+@testable import Car_Picker
 class CLLocationCoordinate2DTest: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func test_angle() {
+        let firstLocation = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
+        let secondLocation = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
+        let degree = firstLocation.angle(to: secondLocation)
+        XCTAssertEqual(degree, 0,"the angle between (0,0) and (0,0) are 0")
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    func test_getLocation() {
+        let locationModel = LocationModel.init(lng: 0, lat: 0)
+        var newLocation = CLLocationCoordinate2D.init()
+            newLocation.getLocation(location: locationModel)
+        let expectedLocation = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
+        XCTAssertEqual(newLocation, expectedLocation)
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
 
 }

@@ -44,7 +44,7 @@ class CarPickerViewModelTest: XCTestCase {
 
         let carpickerView = carPickerViewController()
         let carpickerViewModel = CarPickerViewModel(viewController: carpickerView)
-        let bookOpnedStatus = carpickerViewModel.handelvehicleStatus(json: MockedData.bookingOpened)
+        let _ = carpickerViewModel.handelvehicleStatus(json: MockedData.bookingOpened)
         let status = carpickerViewModel.handelvehicleStatus(json: MockedData.intermediateStatus)
         XCTAssert(status)
     }
@@ -106,8 +106,10 @@ class CarPickerViewModelTest: XCTestCase {
     }
 
     func test_stopConnection() {
+
         let carpickerView = carPickerViewController()
         let carpickerViewModel = CarPickerViewModel(viewController: carpickerView)
+        carpickerViewModel.startConnection()
         XCTAssert(carpickerViewModel.stopConnection())
     }
 }

@@ -13,23 +13,25 @@ class CarPickerViewControllerTest: XCTestCase {
 
     func test_showVehcileMarker() {
 
-        let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CarPickerViewController") as! CarPickerViewController
+        let viewController = UIStoryboard.init(name: "Main", bundle: nil)
+                            .instantiateViewController(withIdentifier: "CarPickerViewController") as! CarPickerViewController
         viewController.loadViewIfNeeded()
         let postion = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
-        XCTAssert(viewController.showVehcileMarker(position: postion).isEqual(to: postion))
+        XCTAssertEqual(viewController.showVehcileMarker(position: postion), postion)
     }
 
     func test_updateMapWithMarkers() {
 
-        let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CarPickerViewController") as! CarPickerViewController
+        let viewController = UIStoryboard.init(name: "Main", bundle: nil)
+                            .instantiateViewController(withIdentifier: "CarPickerViewController") as! CarPickerViewController
         viewController.loadViewIfNeeded()
         let postion = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
         XCTAssert(viewController.updateMapWithMarkers(locations: [postion]))
     }
     func test_dimTripButton() {
-        let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CarPickerViewController") as! CarPickerViewController
+        let viewController = UIStoryboard.init(name: "Main", bundle: nil)
+                            .instantiateViewController(withIdentifier: "CarPickerViewController") as! CarPickerViewController
         viewController.loadViewIfNeeded()
-        let postion = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
         XCTAssert(viewController.dimTripButton(enabled: true))
     }
 

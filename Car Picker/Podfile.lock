@@ -15,6 +15,8 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (3.1.0):
     - GoogleMaps/Base (= 3.1.0)
+  - Nimble (8.0.4)
+  - Quick (2.2.0)
   - Starscream (3.1.0)
 
 DEPENDENCIES:
@@ -22,23 +24,30 @@ DEPENDENCIES:
   - AppCenter
   - GoogleMaps
   - GooglePlaces
+  - Nimble
+  - Quick
   - Starscream
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AppCenter
     - GoogleMaps
     - GooglePlaces
     - Starscream
+  trunk:
+    - Nimble
+    - Quick
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AppCenter: 21decaa4488024e8355e650e44ccabb69ca60d47
   GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
   GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
+  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
+  Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   Starscream: 08172b481e145289c4930cb567230fb55897cfa4
 
-PODFILE CHECKSUM: b15442524b537b11453fbc8f83694bdd04520479
+PODFILE CHECKSUM: 2f9e9808522dc8cc17dcaa2927979171f44ac017
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4

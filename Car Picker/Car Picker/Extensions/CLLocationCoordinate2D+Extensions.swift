@@ -8,7 +8,7 @@ import UIKit
 import Foundation
 import CoreLocation
 
-extension  CLLocationCoordinate2D {
+extension  CLLocationCoordinate2D: Equatable {
     func angle(to comparisonPoint: CLLocationCoordinate2D) -> CGFloat {
         let originX = CGFloat(comparisonPoint.latitude) - CGFloat(self.latitude)
         let originY = CGFloat(comparisonPoint.longitude) - CGFloat(self.longitude)
@@ -23,13 +23,14 @@ extension  CLLocationCoordinate2D {
         latitude = location.lat
         longitude = location.lng
     }
-   func isEqual(to:CLLocationCoordinate2D) -> Bool {
-    return self.latitude == to.latitude && self.longitude == to.longitude
-    }
 }
 
 extension CGFloat {
     var degrees: CGFloat {
         return self * CGFloat(180.0 / Double.pi)
     }
+}
+
+public func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+    return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
 }
