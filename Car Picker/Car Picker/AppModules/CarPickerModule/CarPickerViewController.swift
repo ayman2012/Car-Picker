@@ -38,19 +38,44 @@ class CarPickerViewController: UIViewController {
         }
     }
 
-
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        carPickerViewModel = CarPickerViewModel(viewController: self)
+
+        carPickerViewModel = CarPickerViewModel()
+        setupDataBinding()
+    }
+
+    private func setupDataBinding() {
+        
+        carPickerViewModel?.bookingOpenedClosure =  { [weak self] locations in
+            self?.updateMapWithMarkers(locations: locations)
+        }
+        carPickerViewModel?.statusUpdatedClosure = { [weak self] locations in
+            self?.updateMapWithMarkers(locations: locations)
+        }
+        carPickerViewModel?.intermediateStopLocationsChangedClosure = { [weak self] loactions in
+            self?.updateMapWithMarkers(locations: loactions)
+        }
+        carPickerViewModel?.checkIfInVehicleStatusClosure = { [weak self] isEnabled in
+            self?.dimTripButton(enabled: !(isEnabled))
+
+        }
+
+        carPickerViewModel?.vehicleLocationUpdatedClosure = { [weak self] location in
+                self?.showVehcileMarker(position: location)
+        }
     }
 }
 extension CarPickerViewController: CarPickerViewControllerProtocol {
+
     @discardableResult
     func showVehcileMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+        
         if breviousPosition == nil {
             addCarMarker(position: position)
         }
+
         CATransaction.begin()
         CATransaction.setAnimationDuration(1.5)
         let degrees = breviousPosition?.angle(to: position)
@@ -66,7 +91,8 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
         return vecileMarker.position
     }
 
-   private func addCarMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+    private func addCarMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+
         breviousPosition = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
         let degrees = breviousPosition?.angle(to: position)
         breviousPosition = position
@@ -81,20 +107,24 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
         DispatchQueue.main.async {
             self.vecileMarker.map = self.containerMapView
         }
-    return vecileMarker.position
+        return vecileMarker.position
     }
+
     @discardableResult
     func updateMapWithMarkers(locations: [CLLocationCoordinate2D])->Bool {
+
         if locations.isEmpty {
             return false
         }
         containerMapView.setUPMapWithMarkers(locationInfo: locations)
         return true
     }
+
     @discardableResult
     func dimTripButton(enabled: Bool) -> Bool {
-      startTripButton.isEnabled = enabled
-      return startTripButton.isEnabled
+
+        startTripButton.isEnabled = enabled
+        return startTripButton.isEnabled
     }
 }
 

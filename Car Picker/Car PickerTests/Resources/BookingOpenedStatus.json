@@ -1,0 +1,28 @@
+{
+    "event": "bookingOpened",
+    "data": {
+        "status": "waitingForPickup",
+        "vehicleLocation": {
+            "address": null,
+            "lng": 10.1,
+            "lat": 20.2
+        },
+        "pickupLocation": {
+            "address": "The street address of the pickup location",
+            "lng": 30.3,
+            "lat": 40.4
+        },
+        "dropoffLocation": {
+            "address": "The street address of the dropoff location",
+            "lng": 50.5,
+            "lat": 60.6
+        },
+        "intermediateStopLocations": [
+            {
+                "address": "The intermediate stops that will be made between pickup and dropoff",
+                "lng": 70.7,
+                "lat": 80.8
+            }
+        ]
+    }
+}

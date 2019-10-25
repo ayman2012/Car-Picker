@@ -20,8 +20,8 @@ class SocketMananager: WebSocketDelegate {
         socket?.delegate = self
     }
 
-    var completionWithMessage: ((String)->Void)?
-    var completionWithData: ((Data)->Void)?
+    var completionWithMessage: ((VehicleStatusModel)->Void)?
+    var completionWithData: ((VehicleStatusModel)->Void)?
     var disconnectcompletion: (()->())?
 
     @discardableResult
@@ -36,9 +36,8 @@ class SocketMananager: WebSocketDelegate {
     func stopConnection()-> Bool {
 
         guard let socket = socket else { return false}
-        if !socket.isConnected { return false }
         socket.disconnect()
-        return true
+        return !socket.isConnected
     }
 
     func websocketDidConnect(socket: WebSocketClient) {
@@ -50,11 +49,15 @@ class SocketMananager: WebSocketDelegate {
     }
 
     func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-        completionWithMessage?(text)
+        guard let jsonData = text.data(using: .utf8) else { return }
+        guard let status = try? JSONDecoder().decode(VehicleStatusModel.self, from: jsonData) else{ return }
+        completionWithMessage?(status)
     }
 
     func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
-        completionWithData?(data)
+        guard let status = try? JSONDecoder().decode(VehicleStatusModel.self, from: data) else{ return }
+        completionWithData?(status)
     }
+
 
 }

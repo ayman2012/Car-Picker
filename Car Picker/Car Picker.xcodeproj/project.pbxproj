@@ -3,12 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2AF35C9E2373CFAE1B1DE825 /* Pods_Car_Picker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E2DF54F52A7F94E0BB3E234 /* Pods_Car_Picker.framework */; };
 		37886A49D092D6154B759C06 /* Pods_Car_PickerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4702A08E8B07F4FC4F59A2 /* Pods_Car_PickerTests.framework */; };
+		8F15B3CB23619E9600FC8E5C /* CarPickerViewModelQuickTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15B3CA23619E9600FC8E5C /* CarPickerViewModelQuickTest.swift */; };
+		8F15B3CD2361FACE00FC8E5C /* IntermediateStopLocationsChangedTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 8F15B3CC2361FACE00FC8E5C /* IntermediateStopLocationsChangedTest.json */; };
+		8F15B3CF2361FB4D00FC8E5C /* VehicleLocationUpdatedStatus.json in Resources */ = {isa = PBXBuildFile; fileRef = 8F15B3CE2361FB4D00FC8E5C /* VehicleLocationUpdatedStatus.json */; };
+		8F15B3D12361FB7500FC8E5C /* StatusUpdated.json in Resources */ = {isa = PBXBuildFile; fileRef = 8F15B3D02361FB7500FC8E5C /* StatusUpdated.json */; };
+		8F15B3D32361FC0D00FC8E5C /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15B3D22361FC0D00FC8E5C /* TestHelper.swift */; };
 		8F16374A2351EC59005F3E0F /* CarPickerContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1637492351EC59005F3E0F /* CarPickerContract.swift */; };
 		8F16374D2351EFD2005F3E0F /* CarPickerViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F16374C2351EFD2005F3E0F /* CarPickerViewModelTest.swift */; };
 		8F587DC92340EEE2000B8CA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F587DC82340EEE2000B8CA4 /* AppDelegate.swift */; };
@@ -23,7 +28,7 @@
 		8F9E51EA23565D9C00931AB2 /* CarPickerViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */; };
 		8FAA92B22358FFCF003FA690 /* CLLocationCoordinate2DTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA92B12358FFCF003FA690 /* CLLocationCoordinate2DTest.swift */; };
 		8FAA92B423590655003FA690 /* SocketMananagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA92B323590655003FA690 /* SocketMananagerTest.swift */; };
-		8FAA92B723590D85003FA690 /* bookingOpenedJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 8FAA92B623590D85003FA690 /* bookingOpenedJson.json */; };
+		8FAA92B723590D85003FA690 /* BookingOpenedStatus.json in Resources */ = {isa = PBXBuildFile; fileRef = 8FAA92B623590D85003FA690 /* BookingOpenedStatus.json */; };
 		8FD53DBA2347ABC70055C7D6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD53DB92347ABC70055C7D6 /* Constants.swift */; };
 		8FD53DBD2347ACCD0055C7D6 /* CLLocationCoordinate2D+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD53DBC2347ACCD0055C7D6 /* CLLocationCoordinate2D+Extensions.swift */; };
 		8FD53DBF2347BB660055C7D6 /* GoogleMapExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD53DBE2347BB660055C7D6 /* GoogleMapExtenstion.swift */; };
@@ -46,6 +51,11 @@
 		40B0282D0640D77E0D607CC7 /* Pods-Car PickerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car PickerTests.release.xcconfig"; path = "Target Support Files/Pods-Car PickerTests/Pods-Car PickerTests.release.xcconfig"; sourceTree = "<group>"; };
 		5509C8A5A2E8B579E2BB67A6 /* Pods-Car Picker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car Picker.debug.xcconfig"; path = "Target Support Files/Pods-Car Picker/Pods-Car Picker.debug.xcconfig"; sourceTree = "<group>"; };
 		7408C33FB26A74ABED501E86 /* Pods-Car PickerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car PickerTests.debug.xcconfig"; path = "Target Support Files/Pods-Car PickerTests/Pods-Car PickerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8F15B3CA23619E9600FC8E5C /* CarPickerViewModelQuickTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPickerViewModelQuickTest.swift; sourceTree = "<group>"; };
+		8F15B3CC2361FACE00FC8E5C /* IntermediateStopLocationsChangedTest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = IntermediateStopLocationsChangedTest.json; sourceTree = "<group>"; };
+		8F15B3CE2361FB4D00FC8E5C /* VehicleLocationUpdatedStatus.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VehicleLocationUpdatedStatus.json; sourceTree = "<group>"; };
+		8F15B3D02361FB7500FC8E5C /* StatusUpdated.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = StatusUpdated.json; sourceTree = "<group>"; };
+		8F15B3D22361FC0D00FC8E5C /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; usesTabs = 1; wrapsLines = 0; };
 		8F1637492351EC59005F3E0F /* CarPickerContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPickerContract.swift; sourceTree = "<group>"; };
 		8F16374C2351EFD2005F3E0F /* CarPickerViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPickerViewModelTest.swift; sourceTree = "<group>"; };
 		8F587DC52340EEE2000B8CA4 /* Car Picker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Car Picker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,7 +74,7 @@
 		8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPickerViewControllerTest.swift; sourceTree = "<group>"; };
 		8FAA92B12358FFCF003FA690 /* CLLocationCoordinate2DTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2DTest.swift; sourceTree = "<group>"; };
 		8FAA92B323590655003FA690 /* SocketMananagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMananagerTest.swift; sourceTree = "<group>"; };
-		8FAA92B623590D85003FA690 /* bookingOpenedJson.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bookingOpenedJson.json; sourceTree = "<group>"; };
+		8FAA92B623590D85003FA690 /* BookingOpenedStatus.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BookingOpenedStatus.json; sourceTree = "<group>"; };
 		8FD53DB92347ABC70055C7D6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8FD53DBC2347ACCD0055C7D6 /* CLLocationCoordinate2D+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extensions.swift"; sourceTree = "<group>"; };
 		8FD53DBE2347BB660055C7D6 /* GoogleMapExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapExtenstion.swift; sourceTree = "<group>"; };
@@ -184,6 +194,7 @@
 				8F587DE22340EEE6000B8CA4 /* Info.plist */,
 				8FAA92B12358FFCF003FA690 /* CLLocationCoordinate2DTest.swift */,
 				8FAA92B323590655003FA690 /* SocketMananagerTest.swift */,
+				8F15B3D22361FC0D00FC8E5C /* TestHelper.swift */,
 			);
 			path = "Car PickerTests";
 			sourceTree = "<group>";
@@ -199,7 +210,10 @@
 		8FAA92B523590D5C003FA690 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8FAA92B623590D85003FA690 /* bookingOpenedJson.json */,
+				8FAA92B623590D85003FA690 /* BookingOpenedStatus.json */,
+				8F15B3CC2361FACE00FC8E5C /* IntermediateStopLocationsChangedTest.json */,
+				8F15B3CE2361FB4D00FC8E5C /* VehicleLocationUpdatedStatus.json */,
+				8F15B3D02361FB7500FC8E5C /* StatusUpdated.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -207,6 +221,7 @@
 		8FAA92B8235A0A64003FA690 /* quick&nimbleTests */ = {
 			isa = PBXGroup;
 			children = (
+				8F15B3CA23619E9600FC8E5C /* CarPickerViewModelQuickTest.swift */,
 			);
 			path = "quick&nimbleTests";
 			sourceTree = "<group>";
@@ -333,7 +348,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FAA92B723590D85003FA690 /* bookingOpenedJson.json in Resources */,
+				8F15B3CF2361FB4D00FC8E5C /* VehicleLocationUpdatedStatus.json in Resources */,
+				8F15B3D12361FB7500FC8E5C /* StatusUpdated.json in Resources */,
+				8FAA92B723590D85003FA690 /* BookingOpenedStatus.json in Resources */,
+				8F15B3CD2361FACE00FC8E5C /* IntermediateStopLocationsChangedTest.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +461,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FAA92B423590655003FA690 /* SocketMananagerTest.swift in Sources */,
+				8F15B3D32361FC0D00FC8E5C /* TestHelper.swift in Sources */,
+				8F15B3CB23619E9600FC8E5C /* CarPickerViewModelQuickTest.swift in Sources */,
 				8F587DE12340EEE6000B8CA4 /* Car_PickerTests.swift in Sources */,
 				8F9E51EA23565D9C00931AB2 /* CarPickerViewControllerTest.swift in Sources */,
 				8FAA92B22358FFCF003FA690 /* CLLocationCoordinate2DTest.swift in Sources */,

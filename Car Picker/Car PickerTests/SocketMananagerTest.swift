@@ -9,6 +9,9 @@ import XCTest
 @testable import Car_Picker
 
 class SocketMananagerTest: XCTestCase {
+    override func setUp() {
+        SocketMananager.shared.completionWithMessage = nil
+    }
 
     func test_startConnection() {
         XCTAssert(SocketMananager.shared.startConnection())
@@ -26,32 +29,37 @@ class SocketMananagerTest: XCTestCase {
 //            SocketMananager.shared.completionWithData = { data in
 //                XCTAssertNotNil(data)
 //                expt.fulfill()
+//                SocketMananager.shared.stopConnection()
 //            }
 //            wait(for: [expt], timeout: 20)
 //        }
 
     func test_websocketDidReceiveMessage() {
 
-        let expt = expectation(description: "expect response message")
+        let exptResponse = expectation(description: "expect response message")
 
         SocketMananager.shared.startConnection()
-        SocketMananager.shared.completionWithMessage = { data in
-            expt.fulfill()
-            XCTAssertNotNil(data)
+        SocketMananager.shared.completionWithMessage = { message in
+            XCTAssertNotNil(message)
+             exptResponse.fulfill()
+            SocketMananager.shared.stopConnection()
+            SocketMananager.shared.completionWithMessage = nil
         }
-        wait(for: [expt], timeout: 20)
+        wait(for: [exptResponse], timeout: 10)
     }
 
-//    func test_websocketDidDisconnect() {
-//
-//        let expt = expectation(description: "expect close data")
-//
-//        SocketMananager.shared.startConnection()
-//        SocketMananager.shared.stopConnection()
-//        SocketMananager.shared.disconnectcompletion = {
-//            expt.fulfill()
-//        }
-//        wait(for: [expt], timeout: 20)
-//    }
+    func test_websocketDidDisconnect() {
+
+        let expt = expectation(description: "expect close connection")
+        SocketMananager.shared.completionWithMessage = nil
+
+        SocketMananager.shared.startConnection()
+        SocketMananager.shared.disconnectcompletion = {
+            expt.fulfill()
+        }
+        SocketMananager.shared.stopConnection()
+
+        wait(for: [expt], timeout: 10)
+    }
 
 }
