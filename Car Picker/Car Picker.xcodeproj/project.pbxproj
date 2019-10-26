@@ -22,7 +22,6 @@
 		8F587DD12340EEE2000B8CA4 /* Car_Picker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F587DCF2340EEE2000B8CA4 /* Car_Picker.xcdatamodeld */; };
 		8F587DD32340EEE5000B8CA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F587DD22340EEE5000B8CA4 /* Assets.xcassets */; };
 		8F587DD62340EEE5000B8CA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F587DD42340EEE5000B8CA4 /* LaunchScreen.storyboard */; };
-		8F587DE12340EEE6000B8CA4 /* Car_PickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F587DE02340EEE6000B8CA4 /* Car_PickerTests.swift */; };
 		8F7AF5EA2340F35000B124C6 /* BookingOpenedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AF5E92340F35000B124C6 /* BookingOpenedModel.swift */; };
 		8F94262F234B8DA3006F577E /* SocketMananager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F94262E234B8DA3006F577E /* SocketMananager.swift */; };
 		8F9E51EA23565D9C00931AB2 /* CarPickerViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */; };
@@ -67,7 +66,6 @@
 		8F587DD52340EEE5000B8CA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F587DD72340EEE5000B8CA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F587DDC2340EEE6000B8CA4 /* Car PickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Car PickerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F587DE02340EEE6000B8CA4 /* Car_PickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car_PickerTests.swift; sourceTree = "<group>"; };
 		8F587DE22340EEE6000B8CA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F7AF5E92340F35000B124C6 /* BookingOpenedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingOpenedModel.swift; sourceTree = "<group>"; };
 		8F94262E234B8DA3006F577E /* SocketMananager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMananager.swift; sourceTree = "<group>"; };
@@ -111,6 +109,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8F15B3D423648F1D00FC8E5C /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				8F587DD72340EEE5000B8CA4 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		8F15B3D523648FF500FC8E5C /* XCTests */ = {
+			isa = PBXGroup;
+			children = (
+				8F16374C2351EFD2005F3E0F /* CarPickerViewModelTest.swift */,
+				8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */,
+				8FAA92B12358FFCF003FA690 /* CLLocationCoordinate2DTest.swift */,
+				8FAA92B323590655003FA690 /* SocketMananagerTest.swift */,
+			);
+			path = XCTests;
+			sourceTree = "<group>";
+		};
+		8F15B3D62364902C00FC8E5C /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				8F587DE22340EEE6000B8CA4 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		8F15B3D7236490A400FC8E5C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8F15B3D22361FC0D00FC8E5C /* TestHelper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		8F1637462351EBC4005F3E0F /* CarPickerModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,7 +161,6 @@
 			children = (
 				8F587DD22340EEE5000B8CA4 /* Assets.xcassets */,
 				8F587DD42340EEE5000B8CA4 /* LaunchScreen.storyboard */,
-				8F587DD72340EEE5000B8CA4 /* Info.plist */,
 				8F587DCF2340EEE2000B8CA4 /* Car_Picker.xcdatamodeld */,
 			);
 			path = Resources;
@@ -142,12 +174,12 @@
 			path = AppModules;
 			sourceTree = "<group>";
 		};
-		8F16374B2351EC9F005F3E0F /* SocketManager */ = {
+		8F16374B2351EC9F005F3E0F /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				8F94262E234B8DA3006F577E /* SocketMananager.swift */,
 			);
-			path = SocketManager;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		8F587DBC2340EEE2000B8CA4 = {
@@ -176,8 +208,9 @@
 				8F587DC82340EEE2000B8CA4 /* AppDelegate.swift */,
 				8FD53DC02348058A0055C7D6 /* AppConstants */,
 				8FD53DBB2347ACAF0055C7D6 /* Extensions */,
-				8F16374B2351EC9F005F3E0F /* SocketManager */,
+				8F16374B2351EC9F005F3E0F /* Network */,
 				8F1637482351EC22005F3E0F /* AppModules */,
+				8F15B3D423648F1D00FC8E5C /* SupportingFiles */,
 				8F1637472351EBED005F3E0F /* Resources */,
 			);
 			path = "Car Picker";
@@ -186,15 +219,11 @@
 		8F587DDF2340EEE6000B8CA4 /* Car PickerTests */ = {
 			isa = PBXGroup;
 			children = (
-				8FAA92B8235A0A64003FA690 /* quick&nimbleTests */,
+				8F15B3D523648FF500FC8E5C /* XCTests */,
+				8FAA92B8235A0A64003FA690 /* Quick&NimbleTests */,
+				8F15B3D7236490A400FC8E5C /* Utilities */,
+				8F15B3D62364902C00FC8E5C /* SupportingFiles */,
 				8FAA92B523590D5C003FA690 /* Resources */,
-				8F587DE02340EEE6000B8CA4 /* Car_PickerTests.swift */,
-				8F16374C2351EFD2005F3E0F /* CarPickerViewModelTest.swift */,
-				8F9E51E923565D9C00931AB2 /* CarPickerViewControllerTest.swift */,
-				8F587DE22340EEE6000B8CA4 /* Info.plist */,
-				8FAA92B12358FFCF003FA690 /* CLLocationCoordinate2DTest.swift */,
-				8FAA92B323590655003FA690 /* SocketMananagerTest.swift */,
-				8F15B3D22361FC0D00FC8E5C /* TestHelper.swift */,
 			);
 			path = "Car PickerTests";
 			sourceTree = "<group>";
@@ -218,12 +247,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		8FAA92B8235A0A64003FA690 /* quick&nimbleTests */ = {
+		8FAA92B8235A0A64003FA690 /* Quick&NimbleTests */ = {
 			isa = PBXGroup;
 			children = (
 				8F15B3CA23619E9600FC8E5C /* CarPickerViewModelQuickTest.swift */,
 			);
-			path = "quick&nimbleTests";
+			path = "Quick&NimbleTests";
 			sourceTree = "<group>";
 		};
 		8FD53DBB2347ACAF0055C7D6 /* Extensions */ = {
@@ -463,7 +492,6 @@
 				8FAA92B423590655003FA690 /* SocketMananagerTest.swift in Sources */,
 				8F15B3D32361FC0D00FC8E5C /* TestHelper.swift in Sources */,
 				8F15B3CB23619E9600FC8E5C /* CarPickerViewModelQuickTest.swift in Sources */,
-				8F587DE12340EEE6000B8CA4 /* Car_PickerTests.swift in Sources */,
 				8F9E51EA23565D9C00931AB2 /* CarPickerViewControllerTest.swift in Sources */,
 				8FAA92B22358FFCF003FA690 /* CLLocationCoordinate2DTest.swift in Sources */,
 				8F16374D2351EFD2005F3E0F /* CarPickerViewModelTest.swift in Sources */,
@@ -623,7 +651,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8D93MAVT5Q;
-				INFOPLIST_FILE = "$(SRCROOT)/Car Picker/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Car Picker/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -642,7 +670,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8D93MAVT5Q;
-				INFOPLIST_FILE = "$(SRCROOT)/Car Picker/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Car Picker/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

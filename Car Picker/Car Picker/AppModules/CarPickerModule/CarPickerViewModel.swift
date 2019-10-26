@@ -8,8 +8,6 @@
 import Foundation
 import CoreLocation
 
-typealias completionCallback = ()->Void
-
 class CarPickerViewModel {
 
     var bookingOpenedClosure: (([CLLocationCoordinate2D])->Void)?
@@ -26,7 +24,9 @@ class CarPickerViewModel {
     func handelvehicleStatus(vehcileStatus: VehicleStatusModel) -> Bool {
 
         switch vehcileStatus {
+
         case .bookingOpened(let locationDataModel ):
+
             vehicleLocation =  CLLocationCoordinate2D.init(latitude: locationDataModel.vehicleLocation?.lat ?? 0,
                                                            longitude: locationDataModel.vehicleLocation?.lng ?? 0)
             var location = CLLocationCoordinate2D.init(latitude: locationDataModel.pickupLocation?.lat ?? 0,
@@ -44,6 +44,7 @@ class CarPickerViewModel {
 
             guard let locations = locations , let vehicleLoaction = vehicleLocation else {return false}
             bookingOpenedClosure?([vehicleLoaction,locations[0]])
+
         case .vehicleLocationUpdated(let vehicleLocationUpdatedModel):
             return setupVehicleLoaction(vehicleLocationModel:vehicleLocationUpdatedModel)
 
@@ -66,12 +67,15 @@ class CarPickerViewModel {
                 locations?.append(dropOffLocation)
             }
             intermediateStopLocationsChangedClosure?(locations ?? [])
+
         case .bookingClosed:
             locations = []
             vehicleLocation = nil
+
         case .other:
             return false
         }
+
         return true
     }
 

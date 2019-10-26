@@ -6,6 +6,7 @@
 //
 
 import XCTest
+
 @testable import Car_Picker
 
 class SocketMananagerTest: XCTestCase {
@@ -14,11 +15,13 @@ class SocketMananagerTest: XCTestCase {
     }
 
     func test_startConnection() {
+
         XCTAssert(SocketMananager.shared.startConnection())
         SocketMananager.shared.stopConnection()
     }
 
     func test_stopConnection() {
+        
         SocketMananager.shared.startConnection()
         XCTAssert(SocketMananager.shared.stopConnection())
     }
