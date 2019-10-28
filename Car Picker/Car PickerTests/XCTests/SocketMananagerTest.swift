@@ -10,9 +10,6 @@ import XCTest
 @testable import Car_Picker
 
 class SocketMananagerTest: XCTestCase {
-    override func setUp() {
-        SocketMananager.shared.completionWithMessage = nil
-    }
 
     func test_startConnection() {
 
@@ -25,17 +22,6 @@ class SocketMananagerTest: XCTestCase {
         SocketMananager.shared.startConnection()
         XCTAssert(SocketMananager.shared.stopConnection())
     }
-
-//        func test_websocketDidReceiveData() {
-//            SocketMananager.shared.startConnection()
-//            let expt = expectation(description: "expect response data")
-//            SocketMananager.shared.completionWithData = { data in
-//                XCTAssertNotNil(data)
-//                expt.fulfill()
-//                SocketMananager.shared.stopConnection()
-//            }
-//            wait(for: [expt], timeout: 20)
-//        }
 
     func test_websocketDidReceiveMessage() {
 
@@ -51,18 +37,18 @@ class SocketMananagerTest: XCTestCase {
         wait(for: [exptResponse], timeout: 10)
     }
 
-    func test_websocketDidDisconnect() {
-
-        let expt = expectation(description: "expect close connection")
-        SocketMananager.shared.completionWithMessage = nil
-
-        SocketMananager.shared.startConnection()
-        SocketMananager.shared.disconnectcompletion = {
-            expt.fulfill()
-        }
-        SocketMananager.shared.stopConnection()
-
-        wait(for: [expt], timeout: 10)
-    }
+//    func test_websocketDidDisconnect() {
+//
+//        let expt = expectation(description: "expect close connection")
+//        SocketMananager.shared.completionWithMessage = nil
+//
+//        SocketMananager.shared.startConnection()
+//        SocketMananager.shared.disconnectcompletion = {
+//            expt.fulfill()
+//        }
+//        SocketMananager.shared.stopConnection()
+//
+//        wait(for: [expt], timeout: 10)
+//    }
 
 }

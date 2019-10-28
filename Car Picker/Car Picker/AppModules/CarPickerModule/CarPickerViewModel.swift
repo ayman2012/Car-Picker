@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class CarPickerViewModel {
+class CarPickerViewModel: CarPickerViewModelProtocol {
 
     var bookingOpenedClosure: (([CLLocationCoordinate2D])->Void)?
     var statusUpdatedClosure: (([CLLocationCoordinate2D])->Void)?
@@ -27,19 +27,16 @@ class CarPickerViewModel {
 
         case .bookingOpened(let locationDataModel ):
 
-            vehicleLocation =  CLLocationCoordinate2D.init(latitude: locationDataModel.vehicleLocation?.lat ?? 0,
-                                                           longitude: locationDataModel.vehicleLocation?.lng ?? 0)
-            var location = CLLocationCoordinate2D.init(latitude: locationDataModel.pickupLocation?.lat ?? 0,
-                                                       longitude: locationDataModel.pickupLocation?.lng ?? 0)
+            vehicleLocation =  CLLocationCoordinate2D.init(location: locationDataModel.vehicleLocation)
+            var location = CLLocationCoordinate2D.init(location: locationDataModel.pickupLocation)
             locations?.append(location)
 
             for locationItem in locationDataModel.intermediateStopLocations ?? []{
-                location = CLLocationCoordinate2D.init(latitude: locationItem.lat, longitude: locationItem.lng)
+                location = CLLocationCoordinate2D.init(location: locationItem)
                 locations?.append(location)
             }
 
-            location = CLLocationCoordinate2D.init(latitude: locationDataModel.dropoffLocation?.lat ?? 0,
-                                                   longitude: locationDataModel.dropoffLocation?.lng ?? 0)
+            location = CLLocationCoordinate2D.init(location: locationDataModel.dropoffLocation)
             locations?.append(location)
 
             guard let locations = locations , let vehicleLoaction = vehicleLocation else {return false}
@@ -60,8 +57,7 @@ class CarPickerViewModel {
             guard let vehicleLoaction = vehicleLocation else {return false}
             locations = [vehicleLoaction]
             for itermediateLocation in intermediateLoactionsModel.locations {
-                locations?.append(CLLocationCoordinate2D.init(latitude: itermediateLocation.lat,
-                                                              longitude: itermediateLocation.lng))
+                locations?.append(CLLocationCoordinate2D.init(location: itermediateLocation))
             }
             if let dropOffLocation =  dropOffLocation {
                 locations?.append(dropOffLocation)
@@ -91,7 +87,7 @@ class CarPickerViewModel {
     @discardableResult
     private func checkIfInVehicleStatus(status: String) -> Bool {
 
-        if status == "inVehicle" {
+        if status == Constants.inVehicle {
             checkIfInVehicleStatusClosure?(true)
             guard let location = vehicleLocation else { return false }
             guard var locationsData = locations, !locationsData.isEmpty else { return false}

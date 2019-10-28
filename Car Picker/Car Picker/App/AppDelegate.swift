@@ -28,6 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             MSAnalytics.self,
             MSCrashes.self
             ])
+        let navController = UINavigationController()
+        let coordinator = AppCoordinator.init(navigationController: navController)
+        coordinator.start()
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
+
         return true
     }
 

@@ -19,4 +19,9 @@ class Constants {
         case intermediateStopLocationsChanged = "intermediateStopLocationsChanged"
         case bookingClosed = "bookingClosed"
     }
+    enum buttonStatus: String {
+        case cancel = "Cancel trip"
+        case start = "Start a trip"
+    }
+    static let inVehicle = "inVehicle"
 }

@@ -1,12 +1,11 @@
 //
-//  BookingOpened.swift
+//  VehicleStatusModel.swift
 //  Car Picker
 //
-//  Created by Ayman Fathy on 9/29/19.
+//  Created by Ayman Fathy on 10/28/19.
 //
 
 import Foundation
-
 enum VehicleStatusModel: Decodable {
     func encode(to encoder: Encoder) throws {
 
@@ -28,28 +27,31 @@ enum VehicleStatusModel: Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let event = try values.decodeIfPresent(String.self, forKey: .event)
         switch event ?? "" {
-        case "bookingOpened":
+        case Constants.VehicleSatsus.bookingOpened.rawValue:
+
             let model = try values.decodeIfPresent(BookingOpenedModel.self, forKey: .data)
             self = .bookingOpened(model: model!)
 
+        case Constants.VehicleSatsus.vehicleLocationUpdated.rawValue:
 
-        case "vehicleLocationUpdated":
             let model = try values.decodeIfPresent(LocationModel.self, forKey: .data)
             let vehicleLocationModel = VehicleLocationUpdatedModel.init(location: model!)
             self = .vehicleLocationUpdated(model: vehicleLocationModel)
 
 
-        case "statusUpdated":
+        case Constants.VehicleSatsus.statusUpdated.rawValue:
+
             let status = try values.decodeIfPresent(String.self, forKey: .data)
             let statusModel = StatusUpdatedModel.init(status: status!)
             self = .statusUpdated(model: statusModel)
 
-        case "intermediateStopLocationsChanged":
+        case Constants.VehicleSatsus.intermediateStopLocationsChanged.rawValue:
+            
             let model = try values.decodeIfPresent([LocationModel].self, forKey: .data)
             let intermediateLocations = IntermediateStopLocationsChangedModel.init(locations: model ?? [])
             self = .intermediateStopLocationsChanged(model: intermediateLocations)
 
-        case "bookingClosed":
+        case Constants.VehicleSatsus.bookingClosed.rawValue:
             self = .other
 
         default:
@@ -75,58 +77,5 @@ extension VehicleStatusModel: Equatable {
         default:
             return false
         }
-    }
-}
-
-
-
-
-//------------------------
-struct BookingOpenedModel: Codable {
-    let status: String?
-    let vehicleLocation, pickupLocation, dropoffLocation: LocationModel?
-    let intermediateStopLocations: [LocationModel]?
-}
-
-// MARK: - DataClass
-//struct DataClassMdoel: Codable {
-//    let status: String
-//    let vehicleLocation, pickupLocation, dropoffLocation: LocationModel
-//    let intermediateStopLocations: [LocationModel]
-//}
-struct VehicleLocationUpdatedModel: Codable {
-    let location: LocationModel
-    init(location: LocationModel) {
-        self.location = location
-    }
-}
-// MARK: - Location
-class LocationModel: Codable, Equatable {
-    static func == (lhs: LocationModel, rhs: LocationModel) -> Bool {
-        return lhs.lat == rhs.lat && lhs.lng == rhs.lng
-    }
-    init(lng: Double, lat: Double) {
-        self.lng = lng
-        self.lat = lat
-        self.event = nil
-        self.address = nil
-    }
-
-    let event: String?
-    let address: String?
-    let lng, lat: Double
-}
-
-// MARK: - StatusUpdated
-struct StatusUpdatedModel: Codable {
-    let status: String
-    init(status: String) {
-        self.status = status
-    }
-}
-struct IntermediateStopLocationsChangedModel: Codable {
-    let locations: [LocationModel]
-    init(locations:[LocationModel]) {
-        self.locations = locations
     }
 }

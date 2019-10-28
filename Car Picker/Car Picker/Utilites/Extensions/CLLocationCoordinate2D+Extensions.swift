@@ -19,9 +19,9 @@ extension  CLLocationCoordinate2D: Equatable {
         }
         return bearingDegrees
     }
-   mutating func getLocation(location: LocationModel){
-        latitude = location.lat
-        longitude = location.lng
+   init (location: LocationModel?){
+        self.latitude = location?.lat ?? 0
+        self.longitude = location?.lng ?? 0
     }
 }
 

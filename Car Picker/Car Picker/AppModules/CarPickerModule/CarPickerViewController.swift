@@ -12,7 +12,8 @@ import GoogleMaps
 import Alamofire
 import Foundation
 
-class CarPickerViewController: UIViewController {
+class CarPickerViewController: UIViewController, Storyboarded {
+   
 
     //MARK: Outlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -21,29 +22,19 @@ class CarPickerViewController: UIViewController {
     @IBOutlet weak var intermediateLoactionLabel: UILabel!
 
     //MARK: variables
-    private var carPickerViewModel: CarPickerViewModel?
+    private var carPickerViewModel: CarPickerViewModelProtocol?
     private let vecileMarker = GMSMarker()
     private var breviousPosition: CLLocationCoordinate2D?
 
-    @IBAction func startTripAction(_ sender: Any) {
-
-        if startTripButton.titleLabel?.text == "Cancel trip" {
-            startTripButton.setTitle("Start a trip", for: .normal)
-            startTripButton.setTitleColor(.blue, for: .normal)
-            carPickerViewModel?.stopConnection()
-        }else{
-            startTripButton.setTitle("Cancel trip", for: .normal)
-            startTripButton.setTitleColor(.red, for: .normal)
-            carPickerViewModel?.startConnection()
-        }
-    }
 
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        carPickerViewModel = CarPickerViewModel()
         setupDataBinding()
+    }
+
+    func setupViewModel(viewModel: CarPickerViewModelProtocol) {
+        self.carPickerViewModel = viewModel
     }
 
     private func setupDataBinding() {
@@ -64,6 +55,19 @@ class CarPickerViewController: UIViewController {
 
         carPickerViewModel?.vehicleLocationUpdatedClosure = { [weak self] location in
                 self?.showVehcileMarker(position: location)
+        }
+    }
+
+    @IBAction func startTripAction(_ sender: Any) {
+
+        if startTripButton.titleLabel?.text == Constants.buttonStatus.cancel.rawValue {
+            startTripButton.setTitle(Constants.buttonStatus.start.rawValue, for: .normal)
+            startTripButton.setTitleColor(.blue, for: .normal)
+            carPickerViewModel?.stopConnection()
+        } else {
+            startTripButton.setTitle(Constants.buttonStatus.cancel.rawValue, for: .normal)
+            startTripButton.setTitleColor(.red, for: .normal)
+            carPickerViewModel?.startConnection()
         }
     }
 }
@@ -90,7 +94,8 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
         }
         return vecileMarker.position
     }
-
+    
+    @discardableResult
     private func addCarMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
 
         breviousPosition = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
