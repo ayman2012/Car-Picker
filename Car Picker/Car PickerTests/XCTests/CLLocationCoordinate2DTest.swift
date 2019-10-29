@@ -23,8 +23,7 @@ class CLLocationCoordinate2DTest: XCTestCase {
     func test_getLocation() {
 
         let locationModel = LocationModel.init(lng: 0, lat: 0)
-        var newLocation = CLLocationCoordinate2D.init()
-            newLocation.getLocation(location: locationModel)
+        var newLocation = CLLocationCoordinate2D.init(location: locationModel)
         let expectedLocation = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
         XCTAssertEqual(newLocation, expectedLocation)
     }

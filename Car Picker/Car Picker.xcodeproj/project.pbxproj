@@ -152,7 +152,7 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		8F1637462351EBC4005F3E0F /* CarPickerModule */ = {
+		8F1637462351EBC4005F3E0F /* CarPickerScenes */ = {
 			isa = PBXGroup;
 			children = (
 				8F587DCC2340EEE2000B8CA4 /* Main.storyboard */,
@@ -161,7 +161,7 @@
 				8F1637492351EC59005F3E0F /* CarPickerContract.swift */,
 				8F7AF5E82340F33700B124C6 /* VehcileModels */,
 			);
-			path = CarPickerModule;
+			path = CarPickerScenes;
 			sourceTree = "<group>";
 		};
 		8F1637472351EBED005F3E0F /* Resources */ = {
@@ -174,12 +174,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		8F1637482351EC22005F3E0F /* AppModules */ = {
+		8F1637482351EC22005F3E0F /* Sences */ = {
 			isa = PBXGroup;
 			children = (
-				8F1637462351EBC4005F3E0F /* CarPickerModule */,
+				8F1637462351EBC4005F3E0F /* CarPickerScenes */,
 			);
-			path = AppModules;
+			path = Sences;
 			sourceTree = "<group>";
 		};
 		8F16374B2351EC9F005F3E0F /* Network */ = {
@@ -193,9 +193,9 @@
 		8F5119612366FD2300230CAB /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				8F5AC1A823685FE500299589 /* Protocols */,
 				8FD53DC02348058A0055C7D6 /* AppConstants */,
 				8FD53DBB2347ACAF0055C7D6 /* Extensions */,
-				8F16374B2351EC9F005F3E0F /* Network */,
 			);
 			path = Utilites;
 			sourceTree = "<group>";
@@ -205,8 +205,6 @@
 			children = (
 				8F587DC82340EEE2000B8CA4 /* AppDelegate.swift */,
 				8F511963236721F800230CAB /* AppCoordinators.swift */,
-				8F511967236730E700230CAB /* Coordinator.swift */,
-				8F5119652367267700230CAB /* Storyboarded.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -234,9 +232,10 @@
 		8F587DC72340EEE2000B8CA4 /* Car Picker */ = {
 			isa = PBXGroup;
 			children = (
+				8F5AC1A92368608100299589 /* CoreComponents */,
 				8F5119612366FD2300230CAB /* Utilites */,
 				8F5119622366FD4B00230CAB /* App */,
-				8F1637482351EC22005F3E0F /* AppModules */,
+				8F1637482351EC22005F3E0F /* Sences */,
 				8F15B3D423648F1D00FC8E5C /* SupportingFiles */,
 				8F1637472351EBED005F3E0F /* Resources */,
 			);
@@ -253,6 +252,23 @@
 				8FAA92B523590D5C003FA690 /* Resources */,
 			);
 			path = "Car PickerTests";
+			sourceTree = "<group>";
+		};
+		8F5AC1A823685FE500299589 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8F511967236730E700230CAB /* Coordinator.swift */,
+				8F5119652367267700230CAB /* Storyboarded.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		8F5AC1A92368608100299589 /* CoreComponents */ = {
+			isa = PBXGroup;
+			children = (
+				8F16374B2351EC9F005F3E0F /* Network */,
+			);
+			path = CoreComponents;
 			sourceTree = "<group>";
 		};
 		8F7AF5E82340F33700B124C6 /* VehcileModels */ = {
