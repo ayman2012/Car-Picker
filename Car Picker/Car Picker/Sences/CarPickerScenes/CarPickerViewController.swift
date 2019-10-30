@@ -92,14 +92,20 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
         vecileMarker.rotation = CLLocationDegrees((degrees ?? 0) + 90)
         vecileMarker.position = current
         CATransaction.commit()
-        let camera = GMSCameraPosition.camera(withLatitude: current.latitude, longitude: current.longitude, zoom: 14)
-        containerMapView.animate(to: camera)
+        if !isMarkerWithinScreen(marker: vecileMarker) {
+            let camera = GMSCameraPosition.camera(withLatitude: current.latitude, longitude: current.longitude, zoom: 14)
+            containerMapView.animate(to: camera)
+        }
         DispatchQueue.main.async {
             self.vecileMarker.map = self.containerMapView
         }
         return vecileMarker.position
     }
-
+    private func isMarkerWithinScreen(marker: GMSMarker) -> Bool {
+        let region = self.containerMapView.projection.visibleRegion()
+        let bounds = GMSCoordinateBounds(region: region)
+        return bounds.contains(marker.position)
+    }
     @discardableResult
     private func addCarMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
         vecileMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)

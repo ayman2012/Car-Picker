@@ -21,13 +21,12 @@ target 'Car Picker' do
   pod 'AppCenter'
 
 
-  # Testing
-  pod 'Quick'
-  pod 'Nimble'
-
+ 
   target 'Car PickerTests' do
     inherit! :search_paths
-    # Pods for testing
+    # Testing
+    pod 'Quick'
+    pod 'Nimble'
   end
 
 end

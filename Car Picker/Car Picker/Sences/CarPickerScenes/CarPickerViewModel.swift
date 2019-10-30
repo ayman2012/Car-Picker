@@ -55,15 +55,15 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
             guard let locations = locations, let vehicleLoaction = vehicleLocation else { return false }
             let points = [vehicleLoaction, locations[0]]
             bookedOpenedPublishSubject.onNext(points)
-            
+			
         case .vehicleLocationUpdated(let vehicleLocationUpdatedModel):
             return setupVehicleLoaction(vehicleLocationModel: vehicleLocationUpdatedModel)
-            
+			
         case .statusUpdated(let statusModel):
             let invehicleStatus = checkIfInVehicleStatus(status: statusModel.status)
             intermediateLoactionsPublishSubject.onNext(locations ?? [])
             statusChangePublisSubject.onNext(invehicleStatus)
-            
+        
         case .intermediateStopLocationsChanged(let intermediateLoactionsModel):
             var dropOffLocation: CLLocationCoordinate2D?
             if !(locations?.isEmpty ?? true) {

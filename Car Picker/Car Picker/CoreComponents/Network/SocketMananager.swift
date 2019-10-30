@@ -38,8 +38,11 @@ class SocketMananager {
         }
 
         self?.socket?.onDisconnect = { error in
-            observer.onError(error!)
+            if let error = error {
+                observer.onError(error)
+            }
         }
+        
         self?.socket?.connect()
             return Disposables.create()
         }
