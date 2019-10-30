@@ -76,7 +76,7 @@ class CarPickerViewController: UIViewController, Storyboarded {
 
         carPickerViewModel?
             .vehicleLoactionPublisReplay
-            .scan(nil, accumulator: { [weak self] (previous, current) -> CLLocationCoordinate2D in
+            .scan(nil, accumulator: { [weak self] (previous, current) -> LocationModel in
             self?.updateVehcileMarker(previous: previous, current: current)
             return current
         }).subscribe().disposed(by: disposeBag)
@@ -99,13 +99,14 @@ class CarPickerViewController: UIViewController, Storyboarded {
 extension CarPickerViewController: CarPickerViewControllerProtocol {
 
     @discardableResult
-    func updateVehcileMarker(previous: CLLocationCoordinate2D?, current: CLLocationCoordinate2D) -> CLLocationCoordinate2D? {
+    func updateVehcileMarker(previous: LocationModel?, current: LocationModel) -> CLLocationCoordinate2D? {
         if previous == nil {
             addCarMarker(position: current)
         }
         CATransaction.begin()
         CATransaction.setAnimationDuration(1.5)
-        let degrees = previous?.angle(to: current)
+		let current = CLLocationCoordinate2D.init(location: current)
+		let degrees = CLLocationCoordinate2D.init(location:previous).angle(to: current)
         vecileMarker.rotation = CLLocationDegrees((degrees ?? 0))
         vecileMarker.position = current
         CATransaction.commit()
@@ -124,7 +125,8 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
         return bounds.contains(marker.position)
     }
     @discardableResult
-    private func addCarMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+    private func addCarMarker(position: LocationModel) -> CLLocationCoordinate2D {
+		let position = CLLocationCoordinate2D.init(location: position)
         vecileMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
 		vecileMarker.icon = #imageLiteral(resourceName: "vehicle")
         vecileMarker.setIconSize(scaledToSize: CGSize.init(width: 18, height: 30))
@@ -139,11 +141,15 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
     }
 
     @discardableResult
-    func updateMapWithMarkers(locations: [CLLocationCoordinate2D]) -> Bool {
+    func updateMapWithMarkers(locations: [LocationModel]) -> Bool {
         if locations.isEmpty {
             return false
         }
-        containerMapView.setUPMapWithMarkers(locationInfo: locations)
+		var loactions: [CLLocationCoordinate2D] = []
+		for location in locations {
+			loactions.append(CLLocationCoordinate2D.init(location: location))
+		}
+        containerMapView.setUPMapWithMarkers(locationInfo: loactions)
         return true
     }
 

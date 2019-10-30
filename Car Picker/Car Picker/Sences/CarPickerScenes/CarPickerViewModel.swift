@@ -14,24 +14,16 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
 
     // MARK: - Variables
 
-    var bookedOpenedPublishSubject = PublishSubject<[CLLocationCoordinate2D]>()
+    var bookedOpenedPublishSubject = PublishSubject<[LocationModel]>()
     var statusChangePublisSubject = PublishSubject<Bool>()
-    var vehicleLoactionPublisReplay = PublishSubject<CLLocationCoordinate2D>()
-    var intermediateLoactionsPublishSubject = PublishSubject<[CLLocationCoordinate2D]>()
+    var vehicleLoactionPublisReplay = PublishSubject<LocationModel>()
+    var intermediateLoactionsPublishSubject = PublishSubject<[LocationModel]>()
     var checkIfInVehicleStatusClosure: ((Bool) -> Void)?
-    private var locations: [CLLocationCoordinate2D]? = []
-    private var vehicleLocation: CLLocationCoordinate2D?
+    private var locations: [LocationModel]? = []
+    private var vehicleLocation: LocationModel?
     private var disposeBag = DisposeBag()
 
-     init() {
-        configureBinding()
-    }
-
     // MARK: - Functions
-
-    private func configureBinding() {
-
-    }
 
     @discardableResult
     func handelvehicleStatus(vehcileStatus: VehicleStatusModel) -> Bool {
@@ -40,18 +32,12 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
 
         case .bookingOpened(let locationDataModel ):
 
-            vehicleLocation =  CLLocationCoordinate2D.init(location: locationDataModel.vehicleLocation)
-            var location = CLLocationCoordinate2D.init(location: locationDataModel.pickupLocation)
-            locations?.append(location)
-
-            for locationItem in locationDataModel.intermediateStopLocations ?? [] {
-                location = CLLocationCoordinate2D.init(location: locationItem)
-                locations?.append(location)
-            }
-
-            location = CLLocationCoordinate2D.init(location: locationDataModel.dropoffLocation)
-            locations?.append(location)
-
+            vehicleLocation = locationDataModel.vehicleLocation
+			guard let pickupLocation =  locationDataModel.pickupLocation else { return false }
+            locations?.append(pickupLocation)
+            locations?.append(contentsOf: locationDataModel.intermediateStopLocations ?? [])
+			guard let dropoffLocation =  locationDataModel.dropoffLocation else { return false }
+            locations?.append(dropoffLocation)
             guard let locations = locations, let vehicleLoaction = vehicleLocation else { return false }
             let points = [vehicleLoaction, locations[0]]
             bookedOpenedPublishSubject.onNext(points)
@@ -65,14 +51,14 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
             statusChangePublisSubject.onNext(invehicleStatus)
 
         case .intermediateStopLocationsChanged(let intermediateLoactionsModel):
-            var dropOffLocation: CLLocationCoordinate2D?
+            var dropOffLocation: LocationModel?
             if !(locations?.isEmpty ?? true) {
                 dropOffLocation = locations?.removeLast()
             }
             guard let vehicleLoaction = vehicleLocation else {return false}
             locations = [vehicleLoaction]
             for itermediateLocation in intermediateLoactionsModel.locations {
-                locations?.append(CLLocationCoordinate2D.init(location: itermediateLocation))
+                locations?.append(itermediateLocation)
             }
             if let dropOffLocation =  dropOffLocation {
                 locations?.append(dropOffLocation)
@@ -81,7 +67,6 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
         case .bookingClosed:
             locations = []
             vehicleLocation = nil
-
         case .other:
             return false
         }
@@ -90,8 +75,7 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
 
     @discardableResult
     private func setupVehicleLoaction(vehicleLocationModel: VehicleLocationUpdatedModel) -> Bool {
-        vehicleLocation = CLLocationCoordinate2D.init(latitude: vehicleLocationModel.location.lat,
-                                                      longitude: vehicleLocationModel.location.lng)
+        vehicleLocation = vehicleLocationModel.location
         guard let vehicleLocation = vehicleLocation else { return false}
         vehicleLoactionPublisReplay.onNext(vehicleLocation)
         return true
