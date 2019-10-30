@@ -19,7 +19,13 @@ class CarPickerViewController: UIViewController, Storyboarded {
     @IBOutlet weak var containerMapView: GMSMapView!
     @IBOutlet weak var startTripButton: UIButton!
     @IBOutlet weak var intermediateLoactionLabel: UILabel!
-
+	@IBOutlet weak var startView: UIView! {
+		didSet {
+			startView.layer.cornerRadius = startView.bounds.height / 2
+		}
+	}
+	@IBOutlet weak var statusImageView: UIImageView!
+	
     // MARK: Variables
 
     private var carPickerViewModel: CarPickerViewModelProtocol?
@@ -32,7 +38,15 @@ class CarPickerViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         setupDataBinding()
     }
-
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(true)
+		self.navigationController?.setNavigationBarHidden(true, animated: true)
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(true)
+		self.navigationController?.setNavigationBarHidden(false, animated: false)
+	}
     // MARK: Functions
 
     func setupViewModel(viewModel: CarPickerViewModelProtocol) {
@@ -55,6 +69,8 @@ class CarPickerViewController: UIViewController, Storyboarded {
         carPickerViewModel?
             .statusChangePublisSubject
             .subscribe(onNext: { [weak self] isInVehicle in
+				self?.statusImageView.image = #imageLiteral(resourceName: "inTheVehicle")
+				self?.startView.removeFromSuperview()
             self?.dimTripButton(enabled: !(isInVehicle))
         }).disposed(by: disposeBag)
 
@@ -74,6 +90,7 @@ class CarPickerViewController: UIViewController, Storyboarded {
         } else {
             startTripButton.setTitle(Constants.ButtonStatus.cancel.rawValue, for: .normal)
             startTripButton.setTitleColor(.red, for: .normal)
+			statusImageView.image = #imageLiteral(resourceName: "waiting")
             carPickerViewModel?.startConnection()
         }
     }
@@ -89,7 +106,7 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
         CATransaction.begin()
         CATransaction.setAnimationDuration(1.5)
         let degrees = previous?.angle(to: current)
-        vecileMarker.rotation = CLLocationDegrees((degrees ?? 0) + 90)
+        vecileMarker.rotation = CLLocationDegrees((degrees ?? 0))
         vecileMarker.position = current
         CATransaction.commit()
         if !isMarkerWithinScreen(marker: vecileMarker) {
@@ -109,8 +126,8 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
     @discardableResult
     private func addCarMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
         vecileMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-        vecileMarker.icon = #imageLiteral(resourceName: "carIcon")
-        vecileMarker.setIconSize(scaledToSize: CGSize.init(width: 25, height: 15))
+		vecileMarker.icon = #imageLiteral(resourceName: "vehicle")
+        vecileMarker.setIconSize(scaledToSize: CGSize.init(width: 18, height: 30))
         vecileMarker.appearAnimation = .pop
         vecileMarker.position = position
         let camera = GMSCameraPosition.camera(withLatitude: position.latitude, longitude: position.longitude, zoom: 14)

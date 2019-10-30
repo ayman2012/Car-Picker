@@ -34,6 +34,8 @@ extension GMSMapView {
 
             let marker = GMSMarker()
             marker.position = positions[index]
+			marker.icon = #imageLiteral(resourceName: "pickUpLocation")
+			marker.setIconSize(scaledToSize: CGSize.init(width: 30, height: 50))
             DispatchQueue.main.async {
                 marker.map = self
             }
