@@ -106,8 +106,8 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
         CATransaction.begin()
         CATransaction.setAnimationDuration(1.5)
 		let current = CLLocationCoordinate2D.init(location: current)
-		let degrees = CLLocationCoordinate2D.init(location:previous).angle(to: current)
-        vecileMarker.rotation = CLLocationDegrees((degrees ?? 0))
+		let degrees = CLLocationCoordinate2D.init(location: previous).angle(to: current)
+		vecileMarker.rotation = CLLocationDegrees((degrees))
         vecileMarker.position = current
         CATransaction.commit()
         if !isMarkerWithinScreen(marker: vecileMarker) {
