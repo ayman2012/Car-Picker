@@ -8,13 +8,13 @@
 import XCTest
 import CoreLocation
 @testable import Car_Picker
+// swiftlint:disable force_unwrapping
 
 class CarPickerViewModelTest: XCTestCase {
 
     func test_handelvehicleStatusWithBookOpened() {
-
         let carpickerViewModel = CarPickerViewModel()
-        guard let vehcileStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: MockedData.bookingOpened!) else{ return }
+        guard let vehcileStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: MockedData.bookingOpened!) else { return }
         let status = carpickerViewModel.handelvehicleStatus(vehcileStatus: vehcileStatus)
         XCTAssert(status)
     }
@@ -22,7 +22,7 @@ class CarPickerViewModelTest: XCTestCase {
     func test_handelvehicleLocationUpdated() {
 
         let carpickerViewModel = CarPickerViewModel()
-        guard let vehcileStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: MockedData.vehicleLocationUpdated!) else{ return }
+        guard let vehcileStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: MockedData.vehicleLocationUpdated!) else { return }
         let status = carpickerViewModel.handelvehicleStatus(vehcileStatus: vehcileStatus)
         XCTAssert(status)
     }
@@ -30,10 +30,10 @@ class CarPickerViewModelTest: XCTestCase {
     func test_handelvehicleStatusWithIntermediatStatus() {
 
         let carpickerViewModel = CarPickerViewModel()
-        guard let vehcileStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: MockedData.intermediateStatus!) else{ return }
-        guard let vehcilebookingOpenedStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: MockedData.bookingOpened!) else{ return }
+        guard let vehcileStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: MockedData.intermediateStatus!) else { return }
+        guard let vehcilebookingOpenedStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: MockedData.bookingOpened!) else { return }
 
-        let _ = carpickerViewModel.handelvehicleStatus(vehcileStatus: vehcilebookingOpenedStatus)
+        _ = carpickerViewModel.handelvehicleStatus(vehcileStatus: vehcilebookingOpenedStatus)
 
         let status = carpickerViewModel.handelvehicleStatus(vehcileStatus: vehcileStatus)
         XCTAssert(status)
@@ -42,7 +42,7 @@ class CarPickerViewModelTest: XCTestCase {
     func test_handelvehicleStatusChange() {
 
         let carpickerViewModel = CarPickerViewModel()
-        guard let vehcileStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: MockedData.statusChanged!) else{ return }
+        guard let vehcileStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: MockedData.statusChanged!) else { return }
         let status = carpickerViewModel.handelvehicleStatus(vehcileStatus: vehcileStatus)
         XCTAssert(status)
     }

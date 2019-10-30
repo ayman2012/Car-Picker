@@ -6,19 +6,32 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 import CoreLocation
 
 class CarPickerViewModel: CarPickerViewModelProtocol {
 
-    var bookingOpenedClosure: (([CLLocationCoordinate2D])->Void)?
-    var statusUpdatedClosure: (([CLLocationCoordinate2D])->Void)?
-    var intermediateStopLocationsChangedClosure: (([CLLocationCoordinate2D])->Void)?
-    var checkIfInVehicleStatusClosure: ((Bool)->Void)?
-    var vehicleLocationUpdatedClosure: ((CLLocationCoordinate2D)->Void)?
-    
+    // MARK: - Variables
+
+    var bookedOpenedPublishSubject = PublishSubject<[CLLocationCoordinate2D]>()
+    var statusChangePublisSubject = PublishSubject<Bool>()
+    var vehicleLoactionPublisReplay = PublishSubject<CLLocationCoordinate2D>()
+    var intermediateLoactionsPublishSubject = PublishSubject<[CLLocationCoordinate2D]>()
+    var checkIfInVehicleStatusClosure: ((Bool) -> Void)?
     private var locations: [CLLocationCoordinate2D]? = []
     private var vehicleLocation: CLLocationCoordinate2D?
+    private var disposeBag = DisposeBag()
 
+     init() {
+        configureBinding()
+    }
+
+    // MARK: - Functions
+
+    private func configureBinding() {
+
+    }
 
     @discardableResult
     func handelvehicleStatus(vehcileStatus: VehicleStatusModel) -> Bool {
@@ -31,7 +44,7 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
             var location = CLLocationCoordinate2D.init(location: locationDataModel.pickupLocation)
             locations?.append(location)
 
-            for locationItem in locationDataModel.intermediateStopLocations ?? []{
+            for locationItem in locationDataModel.intermediateStopLocations ?? [] {
                 location = CLLocationCoordinate2D.init(location: locationItem)
                 locations?.append(location)
             }
@@ -39,16 +52,18 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
             location = CLLocationCoordinate2D.init(location: locationDataModel.dropoffLocation)
             locations?.append(location)
 
-            guard let locations = locations , let vehicleLoaction = vehicleLocation else {return false}
-            bookingOpenedClosure?([vehicleLoaction,locations[0]])
-
+            guard let locations = locations, let vehicleLoaction = vehicleLocation else { return false }
+            let points = [vehicleLoaction, locations[0]]
+            bookedOpenedPublishSubject.onNext(points)
+            
         case .vehicleLocationUpdated(let vehicleLocationUpdatedModel):
-            return setupVehicleLoaction(vehicleLocationModel:vehicleLocationUpdatedModel)
-
+            return setupVehicleLoaction(vehicleLocationModel: vehicleLocationUpdatedModel)
+            
         case .statusUpdated(let statusModel):
-            checkIfInVehicleStatus(status:statusModel.status)
-            statusUpdatedClosure?(locations ?? [])
-
+            let invehicleStatus = checkIfInVehicleStatus(status: statusModel.status)
+            intermediateLoactionsPublishSubject.onNext(locations ?? [])
+            statusChangePublisSubject.onNext(invehicleStatus)
+            
         case .intermediateStopLocationsChanged(let intermediateLoactionsModel):
             var dropOffLocation: CLLocationCoordinate2D?
             if !(locations?.isEmpty ?? true) {
@@ -62,8 +77,7 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
             if let dropOffLocation =  dropOffLocation {
                 locations?.append(dropOffLocation)
             }
-            intermediateStopLocationsChangedClosure?(locations ?? [])
-
+            intermediateLoactionsPublishSubject.onNext(locations ?? [])
         case .bookingClosed:
             locations = []
             vehicleLocation = nil
@@ -71,7 +85,6 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
         case .other:
             return false
         }
-
         return true
     }
 
@@ -80,35 +93,33 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
         vehicleLocation = CLLocationCoordinate2D.init(latitude: vehicleLocationModel.location.lat,
                                                       longitude: vehicleLocationModel.location.lng)
         guard let vehicleLocation = vehicleLocation else { return false}
-        vehicleLocationUpdatedClosure?(vehicleLocation)
+        vehicleLoactionPublisReplay.onNext(vehicleLocation)
         return true
     }
 
     @discardableResult
     private func checkIfInVehicleStatus(status: String) -> Bool {
-
         if status == Constants.inVehicle {
-            checkIfInVehicleStatusClosure?(true)
             guard let location = vehicleLocation else { return false }
             guard var locationsData = locations, !locationsData.isEmpty else { return false}
             locationsData[0] = location
             return true
-        }else{
-            checkIfInVehicleStatusClosure?(false)
+        } else {
             return false
         }
     }
 
     @discardableResult
     func startConnection() -> Bool {
-        SocketMananager.shared.completionWithMessage = { [weak self] vehcileStatus in
-            self?.handelvehicleStatus(vehcileStatus: vehcileStatus)
-        }
-        return SocketMananager.shared.startConnection()
+        SocketMananager.shared.connect().subscribe(onNext: {[weak self] vehiclestatus in
+            self?.handelvehicleStatus(vehcileStatus: vehiclestatus)
+        }).disposed(by: disposeBag)
+        return true
     }
-    
+
     @discardableResult
     func stopConnection() -> Bool {
-        return SocketMananager.shared.stopConnection()
+         SocketMananager.shared.connect().subscribe().dispose()
+        return true
     }
 }

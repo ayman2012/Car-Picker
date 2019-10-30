@@ -18,16 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey(Constants.mapKey)
         GMSPlacesClient.provideAPIKey(Constants.mapKey)
 
-        MSAppCenter.start("17b67e6f-c853-48ae-b15a-2fc5f5e1003d", withServices:[
-            MSAnalytics.self,
-            MSCrashes.self
-            ])
+        MSAppCenter.start("17b67e6f-c853-48ae-b15a-2fc5f5e1003d", withServices: [
+            MSAnalytics.self, MSCrashes.self ])
         let navController = UINavigationController()
         let coordinator = AppCoordinator.init(navigationController: navController)
         coordinator.start()
@@ -73,11 +70,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          error conditions that could cause the creation of the store to fail.
         */
         let container = NSPersistentContainer(name: "Car_Picker")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
+
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -109,4 +106,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

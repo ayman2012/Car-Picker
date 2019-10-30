@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Car Picker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8F587DDB2340EEE6000B8CA4"
+               BuildableName = "Car PickerTests.xctest"
+               BlueprintName = "Car PickerTests"
+               ReferencedContainer = "container:Car Picker.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -39,16 +53,6 @@
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8F587DDB2340EEE6000B8CA4"
-               BuildableName = "Car PickerTests.xctest"
-               BlueprintName = "Car PickerTests"
-               ReferencedContainer = "container:Car Picker.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

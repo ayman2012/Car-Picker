@@ -6,103 +6,103 @@
 //
 
 import UIKit
-import Starscream
-import GooglePlaces
 import GoogleMaps
-import Alamofire
+import RxSwift
+import RxCocoa
 import Foundation
 
 class CarPickerViewController: UIViewController, Storyboarded {
-   
 
-    //MARK: Outlets
+    // MARK: Outlets
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var containerMapView: GMSMapView!
     @IBOutlet weak var startTripButton: UIButton!
     @IBOutlet weak var intermediateLoactionLabel: UILabel!
 
-    //MARK: variables
+    // MARK: Variables
+
     private var carPickerViewModel: CarPickerViewModelProtocol?
     private let vecileMarker = GMSMarker()
-    private var breviousPosition: CLLocationCoordinate2D?
+    private let disposeBag = DisposeBag()
 
+    // MARK: LifeCycle
 
-    //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDataBinding()
     }
+
+    // MARK: Functions
 
     func setupViewModel(viewModel: CarPickerViewModelProtocol) {
         self.carPickerViewModel = viewModel
     }
 
     private func setupDataBinding() {
-        
-        carPickerViewModel?.bookingOpenedClosure =  { [weak self] locations in
+        carPickerViewModel?
+            .bookedOpenedPublishSubject
+            .subscribe(onNext: { [weak self] locations in
             self?.updateMapWithMarkers(locations: locations)
-        }
-        carPickerViewModel?.statusUpdatedClosure = { [weak self] locations in
-            self?.updateMapWithMarkers(locations: locations)
-        }
-        carPickerViewModel?.intermediateStopLocationsChangedClosure = { [weak self] loactions in
-            self?.updateMapWithMarkers(locations: loactions)
-        }
-        carPickerViewModel?.checkIfInVehicleStatusClosure = { [weak self] isEnabled in
-            self?.dimTripButton(enabled: !(isEnabled))
+        }).disposed(by: disposeBag)
 
-        }
+        carPickerViewModel?
+            .intermediateLoactionsPublishSubject
+            .subscribe(onNext: { [weak self] loactions in
+                self?.updateMapWithMarkers(locations: loactions)
+         }).disposed(by: disposeBag)
 
-        carPickerViewModel?.vehicleLocationUpdatedClosure = { [weak self] location in
-                self?.showVehcileMarker(position: location)
-        }
+        carPickerViewModel?
+            .statusChangePublisSubject
+            .subscribe(onNext: { [weak self] isInVehicle in
+            self?.dimTripButton(enabled: !(isInVehicle))
+        }).disposed(by: disposeBag)
+
+        carPickerViewModel?
+            .vehicleLoactionPublisReplay
+            .scan(nil, accumulator: { [weak self] (previous, current) -> CLLocationCoordinate2D in
+            self?.updateVehcileMarker(previous: previous, current: current)
+            return current
+        }).subscribe().disposed(by: disposeBag)
     }
 
     @IBAction func startTripAction(_ sender: Any) {
-
-        if startTripButton.titleLabel?.text == Constants.buttonStatus.cancel.rawValue {
-            startTripButton.setTitle(Constants.buttonStatus.start.rawValue, for: .normal)
+        if startTripButton.titleLabel?.text == Constants.ButtonStatus.cancel.rawValue {
+            startTripButton.setTitle(Constants.ButtonStatus.start.rawValue, for: .normal)
             startTripButton.setTitleColor(.blue, for: .normal)
             carPickerViewModel?.stopConnection()
         } else {
-            startTripButton.setTitle(Constants.buttonStatus.cancel.rawValue, for: .normal)
+            startTripButton.setTitle(Constants.ButtonStatus.cancel.rawValue, for: .normal)
             startTripButton.setTitleColor(.red, for: .normal)
             carPickerViewModel?.startConnection()
         }
     }
 }
+
 extension CarPickerViewController: CarPickerViewControllerProtocol {
 
     @discardableResult
-    func showVehcileMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
-        
-        if breviousPosition == nil {
-            addCarMarker(position: position)
+    func updateVehcileMarker(previous: CLLocationCoordinate2D?, current: CLLocationCoordinate2D) -> CLLocationCoordinate2D? {
+        if previous == nil {
+            addCarMarker(position: current)
         }
-
         CATransaction.begin()
         CATransaction.setAnimationDuration(1.5)
-        let degrees = breviousPosition?.angle(to: position)
-        breviousPosition = position
+        let degrees = previous?.angle(to: current)
         vecileMarker.rotation = CLLocationDegrees((degrees ?? 0) + 90)
-        vecileMarker.position = position
+        vecileMarker.position = current
         CATransaction.commit()
-        let camera = GMSCameraPosition.camera(withLatitude: position.latitude, longitude: position.longitude, zoom: 14)
+        let camera = GMSCameraPosition.camera(withLatitude: current.latitude, longitude: current.longitude, zoom: 14)
         containerMapView.animate(to: camera)
         DispatchQueue.main.async {
             self.vecileMarker.map = self.containerMapView
         }
         return vecileMarker.position
     }
-    
+
     @discardableResult
     private func addCarMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
-
-        breviousPosition = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
-        let degrees = breviousPosition?.angle(to: position)
-        breviousPosition = position
         vecileMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-        vecileMarker.rotation = CLLocationDegrees((degrees ?? 0) + 90)
         vecileMarker.icon = #imageLiteral(resourceName: "carIcon")
         vecileMarker.setIconSize(scaledToSize: CGSize.init(width: 25, height: 15))
         vecileMarker.appearAnimation = .pop
@@ -116,8 +116,7 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
     }
 
     @discardableResult
-    func updateMapWithMarkers(locations: [CLLocationCoordinate2D])->Bool {
-
+    func updateMapWithMarkers(locations: [CLLocationCoordinate2D]) -> Bool {
         if locations.isEmpty {
             return false
         }
@@ -127,9 +126,7 @@ extension CarPickerViewController: CarPickerViewControllerProtocol {
 
     @discardableResult
     func dimTripButton(enabled: Bool) -> Bool {
-
         startTripButton.isEnabled = enabled
         return startTripButton.isEnabled
     }
 }
-

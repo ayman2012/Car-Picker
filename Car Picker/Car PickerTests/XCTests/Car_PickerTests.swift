@@ -8,8 +8,6 @@
 import XCTest
 @testable import Car_Picker
 
-class Car_PickerTests: XCTestCase {
-
-
+class CarPickerTests: XCTestCase {
 
 }

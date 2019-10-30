@@ -11,7 +11,6 @@ import  UIKit
 
 extension GMSMapView {
     var activityIndicator: UIActivityIndicatorView {
-        
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.style = UIActivityIndicatorView.Style.gray
         activityIndicator.backgroundColor = .black
@@ -20,9 +19,7 @@ extension GMSMapView {
         return activityIndicator
     }
 
-
-    func setUPMapWithMarkers(locationInfo:[CLLocationCoordinate2D]) {
-
+    func setUPMapWithMarkers(locationInfo: [CLLocationCoordinate2D]) {
         self.clear()
         self.addMarker(positions: locationInfo)
    }
@@ -42,8 +39,8 @@ extension GMSMapView {
             }
         }
     }
-    
-    private func showPath(polyStr :String) {
+
+    private func showPath(polyStr: String) {
 
         let path = GMSPath(fromEncodedPath: polyStr)
         let polyline = GMSPolyline(path: path)
@@ -52,51 +49,44 @@ extension GMSMapView {
         polyline.map = self
         self.addSubview(activityIndicator)
     }
-    
-    private func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
+    private func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
 
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         self.activityIndicator.startAnimating()
-        let url = URL(string: "\(Constants.googleMapBaseURl)\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=true&mode=driving&key=AIzaSyBGgDhXicjEjDjZ-OzTphjZa_KXiTW9r_8")!
-        let task = session.dataTask(with: url, completionHandler: {
-            (data, response, error) in
-            if error != nil {
-                print(error!.localizedDescription)
+        guard let url = URL(string: "\(Constants.googleMapBaseURl)\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=true&mode=driving&key=AIzaSyBGgDhXicjEjDjZ-OzTphjZa_KXiTW9r_8") else { return }
+        let task = session.dataTask(with: url, completionHandler: { (data, _, error) in
+            if let error = error {
+                print(error.localizedDescription)
                 print("error in JSONSerialization1")
                 self.activityIndicator.stopAnimating()
-            }
-            else {
+            } else {
                 do {
-                    if let json : [String:Any] = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]{
-
-                        guard let routes = json["routes"] as? NSArray else {
+                    guard let data = data else { return }
+                    if let json: [String: Any] = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] {
+                        guard let routes = json["routes"] as? [Any] else {
                             DispatchQueue.main.async {
                                 print("error in JSONSerialization2")
                                 self.activityIndicator.stopAnimating()
                             }
                             return
                         }
-
-                        if (routes.count > 0) {
-                            let overview_polyline = routes[0] as? NSDictionary
-                            let dictPolyline = overview_polyline?["overview_polyline"] as? NSDictionary
-                            let points = dictPolyline?.object(forKey: "points") as? String
+                        if !(routes.isEmpty) {
+                            let overviewPolyline = routes[0] as? [String: Any]
+                            let dictPolyline = overviewPolyline?["overview_polyline"] as? NSDictionary
+                            guard let points = dictPolyline?.object(forKey: "points") as? String else { return }
                             DispatchQueue.main.async {
-                                self.showPath(polyStr: points!)
+                                self.showPath(polyStr: points)
                                 self.activityIndicator.stopAnimating()
-
                             }
-                        }
-                        else {
+                        } else {
                             DispatchQueue.main.async {
                                 print("error in JSONSerialization3")
                                 self.activityIndicator.stopAnimating()
                             }
                         }
                     }
-                }
-                catch {
+                } catch {
                     print("error in JSONSerialization4")
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
@@ -112,7 +102,7 @@ extension GMSMarker {
     func setIconSize(scaledToSize newSize: CGSize) {
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
         icon?.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        guard let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() else { return }
         UIGraphicsEndImageContext()
         icon = newImage
     }

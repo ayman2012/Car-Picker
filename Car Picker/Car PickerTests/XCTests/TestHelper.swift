@@ -8,10 +8,10 @@
 import Foundation
 
 public class TestHelper {
-   
+
     func loadStubDataFromBundle(name: String, extension: String) -> Data? {
         let bundle = Bundle(for: type(of: self))
-        let url = bundle.url(forResource: name, withExtension: `extension`)
-        return try? Data(contentsOf: url!)
+        guard let url = bundle.url(forResource: name, withExtension: `extension`) else { return }
+        return try? Data(contentsOf: url)
     }
 }

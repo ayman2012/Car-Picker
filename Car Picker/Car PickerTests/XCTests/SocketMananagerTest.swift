@@ -18,7 +18,7 @@ class SocketMananagerTest: XCTestCase {
     }
 
     func test_stopConnection() {
-        
+
         SocketMananager.shared.startConnection()
         XCTAssert(SocketMananager.shared.stopConnection())
     }

@@ -10,11 +10,14 @@ import Quick
 import Nimble
 import CoreLocation
 @testable import Car_Picker
+// swiftlint:disable force_unwrapping
+// swiftlint:disable force_try
+
 class CarPickerViewModelQuickTest: QuickSpec {
 
     override func spec() {
 
-        var ViewModel: CarPickerViewModel?
+        var viewModel: CarPickerViewModel?
 
         beforeEach {
              ViewModel = CarPickerViewModel()
@@ -30,10 +33,10 @@ class CarPickerViewModelQuickTest: QuickSpec {
                 }
             }
             it("should handel and return locations in BookingOpenedClosur") {
-                ViewModel?.bookingOpenedClosure = { loactions in
+                viewModel?.bookingOpenedClosure = { loactions in
                     expect(loactions).notTo(beEmpty())
                 }
-                ViewModel?.handelvehicleStatus(vehcileStatus: vehcileStatus!)
+                viewModel?.handelvehicleStatus(vehcileStatus: vehcileStatus!)
             }
         }
         context("when new itermediate status") {
@@ -46,18 +49,17 @@ class CarPickerViewModelQuickTest: QuickSpec {
                 }
             }
             it("should handel it and return loaction with new intermediate loaction") {
-                let mockedIntermediateLocation = 
-                ViewModel?.intermediateStopLocationsChangedClosure = { loactions in
+                let mockedIntermediateLocation =  ViewModel?.intermediateStopLocationsChangedClosure = { loactions in
 //                    expect(loactions[1]).To
 
                 }
 
-                ViewModel?.handelvehicleStatus(vehcileStatus: vehcileStatus!)
+                viewModel?.handelvehicleStatus(vehcileStatus: vehcileStatus!)
 
                 if let jsonData = TestHelper().loadStubDataFromBundle(name: "IntermediateStopLocationsChangedTest", extension: "json") {
                     vehcileStatus = try! JSONDecoder().decode(VehicleStatusModel.self, from: jsonData)
                 }
-                ViewModel?.handelvehicleStatus(vehcileStatus: vehcileStatus!)
+                viewModel?.handelvehicleStatus(vehcileStatus: vehcileStatus!)
 
             }
         }

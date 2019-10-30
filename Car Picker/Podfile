@@ -7,9 +7,15 @@ target 'Car Picker' do
 
   # Pods for Car Picker
   pod 'Starscream'
+  
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'Alamofire'
+
+  #RX
+  pod 'RxSwift',    '~> 4.0'
+  pod 'RxCocoa',    '~> 4.0'
+  pod 'RxStarscream'
 
   # CI/CD
   pod 'AppCenter'

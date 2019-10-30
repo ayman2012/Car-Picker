@@ -8,6 +8,7 @@
 import XCTest
 import CoreLocation
 @testable import Car_Picker
+// swiftlint:disable force_cast
 
 class CarPickerViewControllerTest: XCTestCase {
 

@@ -9,7 +9,7 @@ import Foundation
 
 struct IntermediateStopLocationsChangedModel: Codable {
     let locations: [LocationModel]
-    init(locations:[LocationModel]) {
+    init(locations: [LocationModel]) {
         self.locations = locations
     }
 }

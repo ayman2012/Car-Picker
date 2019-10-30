@@ -18,7 +18,7 @@ enum VehicleStatusModel: Decodable {
     case bookingClosed
     case other
 
-    enum CodingKeys: String,CodingKey {
+    enum CodingKeys: String, CodingKey {
         case event
         case data
     }
@@ -38,7 +38,6 @@ enum VehicleStatusModel: Decodable {
             let vehicleLocationModel = VehicleLocationUpdatedModel.init(location: model!)
             self = .vehicleLocationUpdated(model: vehicleLocationModel)
 
-
         case Constants.VehicleSatsus.statusUpdated.rawValue:
 
             let status = try values.decodeIfPresent(String.self, forKey: .data)
@@ -46,7 +45,7 @@ enum VehicleStatusModel: Decodable {
             self = .statusUpdated(model: statusModel)
 
         case Constants.VehicleSatsus.intermediateStopLocationsChanged.rawValue:
-            
+
             let model = try values.decodeIfPresent([LocationModel].self, forKey: .data)
             let intermediateLocations = IntermediateStopLocationsChangedModel.init(locations: model ?? [])
             self = .intermediateStopLocationsChanged(model: intermediateLocations)
@@ -61,7 +60,7 @@ enum VehicleStatusModel: Decodable {
 }
 extension VehicleStatusModel: Equatable {
     static func == (lhs: VehicleStatusModel, rhs: VehicleStatusModel) -> Bool {
-        switch (lhs , rhs) {
+        switch (lhs, rhs) {
         case (let .bookingOpened(lhsModel), let .bookingOpened(rhsModel)):
             return lhsModel.pickupLocation == rhsModel.pickupLocation
         case (let .vehicleLocationUpdated(lhsModel), let .vehicleLocationUpdated(rhsModel)):

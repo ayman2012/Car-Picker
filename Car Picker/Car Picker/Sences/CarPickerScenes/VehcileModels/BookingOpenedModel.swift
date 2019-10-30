@@ -12,8 +12,3 @@ struct BookingOpenedModel: Codable {
     let vehicleLocation, pickupLocation, dropoffLocation: LocationModel?
     let intermediateStopLocations: [LocationModel]?
 }
-
-
-
-
-

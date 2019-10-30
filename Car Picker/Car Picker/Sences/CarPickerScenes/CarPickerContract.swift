@@ -6,35 +6,36 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+
 import CoreLocation
 
 protocol CarPickerViewControllerProtocol: class {
 
     @discardableResult
-    func showVehcileMarker(position: CLLocationCoordinate2D) -> CLLocationCoordinate2D
+    func updateVehcileMarker(previous: CLLocationCoordinate2D?, current: CLLocationCoordinate2D) -> CLLocationCoordinate2D?
 
     @discardableResult
     func updateMapWithMarkers(locations: [CLLocationCoordinate2D]) -> Bool
-    
+
     @discardableResult
     func dimTripButton(enabled: Bool) -> Bool
 }
 
 protocol CarPickerViewModelProtocol {
 
-    var bookingOpenedClosure: (([CLLocationCoordinate2D])->Void)? { get set }
-    var statusUpdatedClosure: (([CLLocationCoordinate2D])->Void)? { get set }
-    var intermediateStopLocationsChangedClosure: (([CLLocationCoordinate2D])->Void)? { get set }
-    var checkIfInVehicleStatusClosure: ((Bool)->Void)? { get set }
-    var vehicleLocationUpdatedClosure: ((CLLocationCoordinate2D)->Void)? { get set }
+    var bookedOpenedPublishSubject: PublishSubject<[CLLocationCoordinate2D]> { get }
+    var statusChangePublisSubject: PublishSubject<Bool> { get }
+    var vehicleLoactionPublisReplay: PublishSubject<CLLocationCoordinate2D> { get set }
+    var intermediateLoactionsPublishSubject: PublishSubject<[CLLocationCoordinate2D]> { get }
 
     @discardableResult
     func handelvehicleStatus(vehcileStatus: VehicleStatusModel) -> Bool
 
     @discardableResult
     func startConnection() -> Bool
-    
+
     @discardableResult
     func stopConnection() -> Bool
-
 }

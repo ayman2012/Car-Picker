@@ -7,57 +7,41 @@
 
 import Foundation
 import Starscream
+import RxSwift
+import RxCocoa
 
-class SocketMananager: WebSocketDelegate {
-
+class SocketMananager {
 
     static let shared = SocketMananager()
     private var socket: WebSocket?
 
     private init() {
-
-        socket = WebSocket(url: URL(string: Constants.socketUrl)!)
-        socket?.delegate = self
+        guard let url = URL(string: Constants.socketUrl) else {
+            return
+        }
+        socket = WebSocket(url: url)
     }
 
-    var completionWithMessage: ((VehicleStatusModel)->Void)?
-    var completionWithData: ((VehicleStatusModel)->Void)?
-    var disconnectcompletion: (()->())?
+    func connect() -> Observable<VehicleStatusModel> {
 
-    @discardableResult
-    func startConnection() -> Bool {
+       return Observable.create {  [weak self] observer in
 
-        guard let socket = socket else{ return false}
-        socket.connect()
-        return true
+        self?.socket?.onText = { text in
+            guard let jsonData = text.data(using: .utf8) else { return }
+            guard let status = try? JSONDecoder().decode(VehicleStatusModel.self, from: jsonData) else { return }
+            observer.onNext(status)
+        }
+
+        self?.socket?.onData = { data in
+            guard let vehicleStatus = try? JSONDecoder().decode(VehicleStatusModel.self, from: data) else { return }
+            observer.onNext(vehicleStatus)
+        }
+
+        self?.socket?.onDisconnect = { error in
+            observer.onError(error!)
+        }
+        self?.socket?.connect()
+            return Disposables.create()
+        }
     }
-
-    @discardableResult
-    func stopConnection()-> Bool {
-
-        guard let socket = socket else { return false}
-        socket.disconnect()
-        return !socket.isConnected
-    }
-
-    func websocketDidConnect(socket: WebSocketClient) {
-
-    }
-
-    func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
-        disconnectcompletion?()
-    }
-
-    func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-        guard let jsonData = text.data(using: .utf8) else { return }
-        guard let status = try? JSONDecoder().decode(VehicleStatusModel.self, from: jsonData) else{ return }
-        completionWithMessage?(status)
-    }
-
-    func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
-        guard let status = try? JSONDecoder().decode(VehicleStatusModel.self, from: data) else{ return }
-        completionWithData?(status)
-    }
-
-
 }

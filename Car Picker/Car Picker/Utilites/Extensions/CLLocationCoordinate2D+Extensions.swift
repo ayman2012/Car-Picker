@@ -19,9 +19,9 @@ extension  CLLocationCoordinate2D: Equatable {
         }
         return bearingDegrees
     }
-   init (location: LocationModel?){
-        self.latitude = location?.lat ?? 0
-        self.longitude = location?.lng ?? 0
+
+   init (location: LocationModel?) {
+    self.init(latitude: location?.lat ?? 0, longitude: location?.lng ?? 0)
     }
 }
 
@@ -31,6 +31,6 @@ extension CGFloat {
     }
 }
 
-public func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+public func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
     return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
 }

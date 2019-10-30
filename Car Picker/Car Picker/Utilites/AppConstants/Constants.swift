@@ -11,15 +11,15 @@ class Constants {
     static let mapKey = "AIzaSyBGgDhXicjEjDjZ-OzTphjZa_KXiTW9r_8"
     static let socketUrl = "wss://d2d-frontend-code-challenge.herokuapp.com"
     static let googleMapBaseURl = "https://maps.googleapis.com/maps/api/directions/json?origin="
-    
+
     enum VehicleSatsus: String {
-        case bookingOpened = "bookingOpened"
-        case vehicleLocationUpdated = "vehicleLocationUpdated"
-        case statusUpdated = "statusUpdated"
-        case intermediateStopLocationsChanged = "intermediateStopLocationsChanged"
-        case bookingClosed = "bookingClosed"
+        case bookingOpened
+        case vehicleLocationUpdated
+        case statusUpdated
+        case intermediateStopLocationsChanged
+        case bookingClosed
     }
-    enum buttonStatus: String {
+    enum ButtonStatus: String {
         case cancel = "Cancel trip"
         case start = "Start a trip"
     }

@@ -17,7 +17,7 @@ class CLLocationCoordinate2DTest: XCTestCase {
         let firstLocation = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
         let secondLocation = CLLocationCoordinate2D.init(latitude: 0, longitude: 0)
         let degree = firstLocation.angle(to: secondLocation)
-        XCTAssertEqual(degree, 0,"the angle between (0,0) and (0,0) are 0")
+        XCTAssertEqual(degree, 0, "the angle between (0,0) and (0,0) are 0")
     }
 
     func test_getLocation() {
