@@ -30,18 +30,18 @@ enum VehicleStatusModel: Decodable {
         case Constants.VehicleSatsus.bookingOpened.rawValue:
 
             let model = try values.decodeIfPresent(BookingOpenedModel.self, forKey: .data)
-            self = .bookingOpened(model: model!)
+			self = .bookingOpened(model: model!) // swiftlint:disable:this force_unwrapping
 
         case Constants.VehicleSatsus.vehicleLocationUpdated.rawValue:
 
             let model = try values.decodeIfPresent(LocationModel.self, forKey: .data)
-            let vehicleLocationModel = VehicleLocationUpdatedModel.init(location: model!)
+            let vehicleLocationModel = VehicleLocationUpdatedModel.init(location: model!) // swiftlint:disable:this force_unwrapping
             self = .vehicleLocationUpdated(model: vehicleLocationModel)
 
         case Constants.VehicleSatsus.statusUpdated.rawValue:
 
             let status = try values.decodeIfPresent(String.self, forKey: .data)
-            let statusModel = StatusUpdatedModel.init(status: status!)
+            let statusModel = StatusUpdatedModel.init(status: status!) // swiftlint:disable:this force_unwrapping
             self = .statusUpdated(model: statusModel)
 
         case Constants.VehicleSatsus.intermediateStopLocationsChanged.rawValue:

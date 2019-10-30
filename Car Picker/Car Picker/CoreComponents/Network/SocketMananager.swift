@@ -42,7 +42,7 @@ class SocketMananager {
                 observer.onError(error)
             }
         }
-        
+
         self?.socket?.connect()
             return Disposables.create()
         }
