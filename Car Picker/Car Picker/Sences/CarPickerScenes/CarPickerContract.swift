@@ -29,7 +29,8 @@ protocol CarPickerViewModelProtocol {
     var statusChangePublisSubject: PublishSubject<Bool> { get }
     var vehicleLoactionPublisReplay: PublishSubject<LocationModel> { get set }
     var intermediateLoactionsPublishSubject: PublishSubject<[LocationModel]> { get }
-
+	var bookedClosedPublishSubject: PublishSubject<Bool> { get }
+	var locationsPublisSubject: PublishSubject<[LocationModel]> { get }
     @discardableResult
     func handelvehicleStatus(vehcileStatus: VehicleStatusModel) -> Bool
 

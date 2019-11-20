@@ -19,21 +19,21 @@ extension GMSMapView {
         return activityIndicator
     }
 
-    func setUPMapWithMarkers(locationInfo: [CLLocationCoordinate2D]) {
+    func setUPMapWithMarkers(locationInfo: [LocationModel]) {
         self.clear()
         self.addMarker(positions: locationInfo)
    }
 
-    private func addMarker(positions: [CLLocationCoordinate2D]) {
+    private func addMarker(positions: [LocationModel]) {
 
-        for index in 0..<positions.count {
-
+		for index in 0..<positions.count {
             if index < positions.count - 1 {
-                self.getPolylineRoute(from: positions[index], to: positions[index + 1])
+                self.getPolylineRoute(from: CLLocationCoordinate2D.init(location: positions[index]),
+									  to: CLLocationCoordinate2D.init(location: positions[index + 1]))
             }
-
             let marker = GMSMarker()
-            marker.position = positions[index]
+            marker.position = CLLocationCoordinate2D.init(location: positions[index])
+			marker.title = positions[index].address
 			marker.icon = #imageLiteral(resourceName: "pickUpLocation")
 			marker.setIconSize(scaledToSize: CGSize.init(width: 30, height: 50))
             DispatchQueue.main.async {
@@ -60,7 +60,6 @@ extension GMSMapView {
         let task = session.dataTask(with: url, completionHandler: { (data, _, error) in
             if let error = error {
                 print(error.localizedDescription)
-                print("error in JSONSerialization1")
                 self.activityIndicator.stopAnimating()
             } else {
                 do {
@@ -68,7 +67,6 @@ extension GMSMapView {
                     if let json: [String: Any] = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] {
                         guard let routes = json["routes"] as? [Any] else {
                             DispatchQueue.main.async {
-                                print("error in JSONSerialization2")
                                 self.activityIndicator.stopAnimating()
                             }
                             return
@@ -83,13 +81,11 @@ extension GMSMapView {
                             }
                         } else {
                             DispatchQueue.main.async {
-                                print("error in JSONSerialization3")
                                 self.activityIndicator.stopAnimating()
                             }
                         }
                     }
                 } catch {
-                    print("error in JSONSerialization4")
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
                     }

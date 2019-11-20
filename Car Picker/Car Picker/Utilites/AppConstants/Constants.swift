@@ -24,4 +24,6 @@ class Constants {
         case start = "Start"
     }
     static let inVehicle = "inVehicle"
+	static let numberOfIntermediate = "intermediate loactions: \n"
+	static let tripFinished = "your trip finished"
 }

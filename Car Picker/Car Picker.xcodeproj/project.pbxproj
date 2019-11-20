@@ -386,6 +386,7 @@
 				TargetAttributes = {
 					8F587DC42340EEE2000B8CA4 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1030;
 					};
 					8F587DDB2340EEE6000B8CA4 = {
 						CreatedOnToolsVersion = 10.1;
@@ -754,7 +755,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "learning.Car-Picker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -774,7 +775,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "learning.Car-Picker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

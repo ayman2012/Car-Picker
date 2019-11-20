@@ -18,7 +18,9 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
     var statusChangePublisSubject = PublishSubject<Bool>()
     var vehicleLoactionPublisReplay = PublishSubject<LocationModel>()
     var intermediateLoactionsPublishSubject = PublishSubject<[LocationModel]>()
-    var checkIfInVehicleStatusClosure: ((Bool) -> Void)?
+	var bookedClosedPublishSubject = PublishSubject<Bool>()
+	var locationsPublisSubject = PublishSubject<[LocationModel]>()
+
     private var locations: [LocationModel]? = []
     private var vehicleLocation: LocationModel?
     private var disposeBag = DisposeBag()
@@ -41,6 +43,7 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
             guard let locations = locations, let vehicleLoaction = vehicleLocation else { return false }
             let points = [vehicleLoaction, locations[0]]
             bookedOpenedPublishSubject.onNext(points)
+			locationsPublisSubject.onNext(locations)
 
         case .vehicleLocationUpdated(let vehicleLocationUpdatedModel):
             return setupVehicleLoaction(vehicleLocationModel: vehicleLocationUpdatedModel)
@@ -67,6 +70,7 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
         case .bookingClosed:
             locations = []
             vehicleLocation = nil
+			bookedClosedPublishSubject.onNext(true)
         case .other:
             return false
         }
@@ -95,9 +99,12 @@ class CarPickerViewModel: CarPickerViewModelProtocol {
 
     @discardableResult
     func startConnection() -> Bool {
-        SocketMananager.shared.connect().subscribe(onNext: {[weak self] vehiclestatus in
-            self?.handelvehicleStatus(vehcileStatus: vehiclestatus)
-        }).disposed(by: disposeBag)
+		SocketMananager.shared.connect().subscribe(onNext: {[weak self] vehiclestatus in
+			self?.handelvehicleStatus(vehcileStatus: vehiclestatus)
+			}, onError: { [weak self] _ in
+				self?.bookedClosedPublishSubject.onNext(true)
+		}).disposed(by: disposeBag)
+
         return true
     }
 
